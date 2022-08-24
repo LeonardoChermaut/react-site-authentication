@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Login from "./pages/Login/Login";
+import Home from "./pages/Home/Home";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Routes, Route, Navigate } from "react-router-dom";
+import Register from "./pages/Register/Register";
+import Footer from "./component/Footer/Footer";
+import UserPerfil from "./pages/Perfil/UserPerfil";
+import Context from "./context/index";
 
 function App() {
+  const { signed } = React.useContext(Context);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Routes>
+        <Route index path="*" element={<Navigate to="/login" replace />} />
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/register" element={<Register />} />
+
+        {signed ? (
+          <>
+            <Route exact path="/home" element={<Home />} />
+            <Route exact path="/profile" element={<UserPerfil />} />
+          </>
+        ) : (
+          <Route exact path="/login" element={<Login />} />
+        )}
+      </Routes>
+      <Footer />
+    </>
   );
 }
 
