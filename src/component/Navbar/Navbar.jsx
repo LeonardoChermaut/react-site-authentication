@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import Container from "react-bootstrap/Container";
 import {
   NavbarStyled,
@@ -9,7 +9,6 @@ import {
   Toggle,
 } from "./Styled";
 import CustomButton from "../Buttom/Buttom";
-
 import GetUserContex from "../../service/BaseApi/get-request";
 import { useNavigate } from "react-router-dom";
 import Title from "../Title/Title";

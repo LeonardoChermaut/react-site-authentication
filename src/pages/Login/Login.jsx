@@ -1,5 +1,4 @@
 import React from "react";
-import AlertRequest from "../../component/Alert/AlertRequest";
 import { ContainerInput, CustomForm, FormLogin } from "./Styled";
 import Context from "../../context/index";
 import Title from "../../component/Title/Title";
@@ -7,7 +6,6 @@ import CustomButton from "../../component/Buttom/Buttom";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
 import LoginAlert from "../../component/Alert/LoginRequest";
-import GetUserContex from "../../service/BaseApi/get-request";
 
 export default function Login() {
   const [email, setEmail] = React.useState("");
