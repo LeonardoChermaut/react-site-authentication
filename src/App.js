@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Register from "./pages/Register/Register";
 import Footer from "./component/Footer/Footer";
-import UserPerfil from "./pages/Perfil/UserPerfil";
+import UserPerfil from "./pages/Perfil/Profile";
 import Context from "./context/index";
 
 function App() {
