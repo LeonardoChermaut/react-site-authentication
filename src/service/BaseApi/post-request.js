@@ -1,9 +1,9 @@
 import AlertRequest from "../../component/Alert/AlertRequest";
 import api from "./Api";
 
-export default async function RegisterUser(body) {
+export default async function RegisterUser(request) {
   try {
-    await api.post("/api/user", body).then((res) => {
+    await api.post("/api/user", request).then((res) => {
       if (res.status === 200 || 202) {
         AlertRequest({
           title: "Cadastro com sucesso",

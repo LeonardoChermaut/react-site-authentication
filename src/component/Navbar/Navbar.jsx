@@ -18,12 +18,16 @@ function Navbar() {
 
   function handleSignOut() {
     localStorage.removeItem("token");
-    setTimeout(navigate("/login"), 2500);
     document.location.reload(true);
+    navigate("/login");
   }
 
   function handlePerfil() {
     navigate("/profile");
+  }
+
+  function handleHome() {
+    navigate("/home");
   }
   GetUserContex();
   return (
@@ -32,7 +36,7 @@ function Navbar() {
         <Toggle aria-controls="basic-navbar-nav" />
         <Collapse>
           <ColNav>
-            <Link href="/home">Home</Link>
+            <Link onClick={() => handleHome()}>Home</Link>
 
             <Link href="#">Sobre nós</Link>
             <SignOutButtom onClick={() => handleSignOut()}>Sair</SignOutButtom>

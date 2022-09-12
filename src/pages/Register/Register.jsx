@@ -27,8 +27,8 @@ export default function Register() {
     navigate("/login");
   }
 
-  function handleSubmit(event) {
-    event.preventDefault();
+  function handleSubmit(e) {
+    e.preventDefault();
     const bodyRequest = {
       nome: nome,
       sobrenome: sobrenome,
