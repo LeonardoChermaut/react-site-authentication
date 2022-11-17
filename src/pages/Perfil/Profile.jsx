@@ -9,7 +9,6 @@ const UserPerfil = () => {
   GetObject();
   console.log(GetObject);
 
-  console.log(user);
   return (
     <>
       <Navbar />

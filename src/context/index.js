@@ -4,22 +4,22 @@ import AlertRequest from "../component/Alert/AlertRequest";
 import API_URL from "../service/BaseApi/Api";
 
 export const UserContext = createContext();
-export function UserProvider({ children }) {
+export const UserProvider = ({ children }) => {
   const [token, setToken] = useState(null);
 
   useEffect(() => {
-    async function storageData() {
+    const storageData = async () => {
       const jwtToken = localStorage.getItem("token");
       if (jwtToken) {
         setToken(jwtToken);
       }
-    }
+    };
     storageData();
   }, []);
 
-  async function signIn(data) {
+  const signIn = async (data) => {
+    const res = await API_URL.post("/login", data);
     try {
-      let res = await API_URL.post("/login", data);
       setToken(res.data);
       API_URL.defaults.headers.common["Authorization"] = `Bearer ${res.data}`;
       localStorage.setItem("token", res.data);
@@ -29,13 +29,11 @@ export function UserProvider({ children }) {
         icon: "error",
       });
     }
-  }
+  };
 
-  function signOut() {
-    setToken(null);
-    localStorage.removeItem("token");
-    localStorage.clear();
-  }
+  const signOut = () => setToken(null);
+  localStorage.removeItem("token");
+  localStorage.clear();
 
   return (
     <UserContext.Provider
@@ -49,6 +47,6 @@ export function UserProvider({ children }) {
       {children}
     </UserContext.Provider>
   );
-}
+};
 
 export default UserContext;

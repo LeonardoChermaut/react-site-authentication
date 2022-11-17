@@ -1,6 +1,6 @@
 import Swal from "sweetalert2";
 
-export default function LoginAlert() {
+const LoginAlert = () => {
   const Toast = Swal.mixin({
     toast: true,
     position: "top-end",
@@ -17,4 +17,6 @@ export default function LoginAlert() {
     icon: "success",
     title: "Bem vindo!",
   });
-}
+};
+
+export default LoginAlert;

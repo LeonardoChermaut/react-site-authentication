@@ -7,26 +7,21 @@ import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
 import LoginAlert from "../../component/Alert/LoginRequest";
 
-export default function Login() {
+const Login = () => {
   const [email, setEmail] = React.useState("");
   const [senha, setSenha] = React.useState("");
   const { signIn, signed } = React.useContext(Context);
   let navigate = useNavigate();
 
-  function validateForm() {
-    return email.length > 0 && senha.length > 0;
-  }
+  const validateForm = () => email.length > 0 && senha.length > 0;
 
-  function registerPage() {
-    navigate("/register");
-  }
+  const registerPage = () => navigate("/register");
 
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    let data = { email: email, senha: senha };
-
+    const data = { email: email, senha: senha };
     signIn(data);
-  }
+  };
 
   if (signed) {
     setTimeout(navigate("/home"), 2500);
@@ -75,4 +70,6 @@ export default function Login() {
         </ContainerInput>
       </section>
     );
-}
+};
+
+export default Login;

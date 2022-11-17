@@ -10,20 +10,18 @@ const Title = ({
   fSize,
   fColor,
   tAlign,
-}) => {
-  return (
-    <CustomTitle
-      mTop={mTop}
-      mLeft={mLeft}
-      mBottom={mBottom}
-      mRight={mRight}
-      fSize={fSize}
-      fontColor={fColor}
-      tAlign={tAlign}
-    >
-      {children}
-    </CustomTitle>
-  );
-};
+}) => (
+  <CustomTitle
+    mTop={mTop}
+    mLeft={mLeft}
+    mBottom={mBottom}
+    mRight={mRight}
+    fSize={fSize}
+    fontColor={fColor}
+    tAlign={tAlign}
+  >
+    {children}
+  </CustomTitle>
+);
 
 export default Title;

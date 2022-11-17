@@ -1,7 +1,7 @@
 import AlertRequest from "../../component/Alert/AlertRequest";
 import api from "./Api";
 
-export default async function RegisterUser(request) {
+const RegisterUser = async (request) => {
   try {
     await api.post("/api/user", request).then((res) => {
       if (res.status === 200 || 202) {
@@ -9,7 +9,6 @@ export default async function RegisterUser(request) {
           title: "Cadastro com sucesso",
           icon: "success",
         });
-        localStorage.clear();
       }
     });
   } catch (e) {
@@ -18,4 +17,6 @@ export default async function RegisterUser(request) {
       icon: "error",
     });
   }
-}
+};
+
+export default RegisterUser;

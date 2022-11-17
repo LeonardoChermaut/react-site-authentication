@@ -7,27 +7,22 @@ import Title from "../../component/Title/Title";
 import CustomButton from "../../component/Buttom/Buttom";
 import register from "../../service/BaseApi/post-request";
 
-export default function Register() {
+const Register = () => {
   let navigate = useNavigate();
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [sobrenome, setSobrenome] = useState("");
 
-  function validateForm() {
-    return (
-      nome.length > 2 &&
-      sobrenome.length > 4 &&
-      email.length > 10 &&
-      senha.length > 7
-    );
-  }
+  const validateForm = () =>
+    nome.length > 2 &&
+    sobrenome.length > 4 &&
+    email.length > 10 &&
+    senha.length > 7;
 
-  function returnLogin() {
-    navigate("/login");
-  }
+  const returnLogin = () => navigate("/login");
 
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const bodyRequest = {
       nome: nome,
@@ -36,7 +31,7 @@ export default function Register() {
       senha: senha,
     };
     register(bodyRequest);
-  }
+  };
 
   return (
     <section>
@@ -90,4 +85,6 @@ export default function Register() {
       </ContainerInput>
     </section>
   );
-}
+};
+
+export default Register;

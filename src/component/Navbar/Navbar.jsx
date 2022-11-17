@@ -13,23 +13,21 @@ import GetUserContex from "../../service/BaseApi/get-request";
 import { useNavigate } from "react-router-dom";
 import Title from "../Title/Title";
 
-function Navbar() {
+const Navbar = () => {
   let navigate = useNavigate();
 
-  function handleSignOut() {
+  const handleSignOut = () => {
     localStorage.removeItem("token");
     document.location.reload(true);
     navigate("/login");
-  }
+  };
 
-  function handlePerfil() {
-    navigate("/profile");
-  }
+  const handlePerfil = () => navigate("/profile");
 
-  function handleHome() {
-    navigate("/home");
-  }
+  const handleHome = () => navigate("/home");
+
   GetUserContex();
+
   return (
     <NavbarStyled expand="lg" sticky="top">
       <Container fluid>
@@ -67,6 +65,6 @@ function Navbar() {
       </Container>
     </NavbarStyled>
   );
-}
+};
 
 export default Navbar;

@@ -2,7 +2,7 @@ import React from "react";
 import { Images, ImagesContainer } from "../../pages/Home/Styled";
 import API_UNSPLASH from "./Api";
 
-export default function GetImages() {
+const GetImages = () => {
   const [image, setImage] = React.useState([]);
 
   React.useEffect(() => {
@@ -21,4 +21,5 @@ export default function GetImages() {
       ))}
     </ImagesContainer>
   );
-}
+};
+export default GetImages;
