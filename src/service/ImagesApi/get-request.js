@@ -1,17 +1,16 @@
-import React from "react";
+import { React, useState, useEffect } from "react";
 import { Images, ImagesContainer } from "../../pages/Home/Styled";
 import API_UNSPLASH from "./Api";
 
 const GetImages = () => {
-  const [image, setImage] = React.useState([]);
+  const [image, setImage] = useState([]);
 
-  React.useEffect(() => {
-    let images = async () => {
-      await API_UNSPLASH.get().then((res) => {
-        setImage(res.data);
+  useEffect(() => {
+    const request = async () =>
+      await API_UNSPLASH.get().then((response) => {
+        setImage(response.data);
       });
-    };
-    images();
+    request();
   }, []);
 
   return (

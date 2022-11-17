@@ -1,13 +1,11 @@
-import React from "react";
+import { React, useState } from "react";
 import { Row, Col, Container } from "react-bootstrap";
 import Navbar from "../../component/Navbar/Navbar";
-import GetObject from "../../service/BaseApi/get-request";
+import GetUserContext from "../../service/BaseApi/get-request";
 
 const UserPerfil = () => {
-  const [user, setUser] = React.useState([]);
-
-  GetObject();
-  console.log(GetObject);
+  const [user, setUser] = useState([]);
+  const { contex } = GetUserContext;
 
   return (
     <>

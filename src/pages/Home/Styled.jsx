@@ -3,11 +3,11 @@ import Container from "react-bootstrap/Container";
 
 export const ImagesContainer = styled(Container)`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-gap: 20px;
+  grid-gap: 2rem;
+  margin-bottom: 20vh;
   align-items: stretch;
   justify-items: stretch;
-  margin-bottom: 20vh;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 `;
 
 export const Images = styled.img`

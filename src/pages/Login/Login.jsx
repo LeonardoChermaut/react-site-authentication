@@ -8,14 +8,13 @@ import { useNavigate } from "react-router-dom";
 import LoginAlert from "../../component/Alert/LoginRequest";
 
 const Login = () => {
+  let navigate = useNavigate();
   const [email, setEmail] = React.useState("");
   const [senha, setSenha] = React.useState("");
   const { signIn, signed } = React.useContext(Context);
-  let navigate = useNavigate();
-
-  const validateForm = () => email.length > 0 && senha.length > 0;
 
   const registerPage = () => navigate("/register");
+  const validateForm = () => email.length > 0 && senha.length > 0;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,7 +23,7 @@ const Login = () => {
   };
 
   if (signed) {
-    setTimeout(navigate("/home"), 2500);
+    navigate("/home");
     LoginAlert();
   } else
     return (

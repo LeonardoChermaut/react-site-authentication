@@ -8,22 +8,21 @@ export const UserProvider = ({ children }) => {
   const [token, setToken] = useState(null);
 
   useEffect(() => {
-    const storageData = async () => {
-      const jwtToken = localStorage.getItem("token");
-      if (jwtToken) {
-        setToken(jwtToken);
-      }
-    };
-    storageData();
+    const userToken = async () => localStorage.getItem("token");
+    if (userToken) {
+      setToken(userToken);
+    }
   }, []);
 
-  const signIn = async (data) => {
-    const res = await API_URL.post("/login", data);
+  const signIn = (data) => {
+    const response = API_URL.post("/login", data);
     try {
-      setToken(res.data);
-      API_URL.defaults.headers.common["Authorization"] = `Bearer ${res.data}`;
-      localStorage.setItem("token", res.data);
-    } catch (error) {
+      setToken(response.data);
+      API_URL.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${response.data}`;
+      localStorage.setItem("token", response.data);
+    } catch (e) {
       AlertRequest({
         title: "Usuário ou senha inválida",
         icon: "error",
@@ -31,9 +30,7 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  const signOut = () => setToken(null);
-  localStorage.removeItem("token");
-  localStorage.clear();
+  const signOut = () => localStorage.clear();
 
   return (
     <UserContext.Provider

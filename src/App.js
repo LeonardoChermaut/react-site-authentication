@@ -8,8 +8,8 @@ import Footer from "./component/Footer/Footer";
 import UserPerfil from "./pages/Perfil/Profile";
 import Context from "./context/index";
 
-const App = () => {
-  let { signed } = React.useContext(Context);
+const App = function () {
+  const { signed } = React.useContext(Context);
 
   return (
     <>
