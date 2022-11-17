@@ -16,25 +16,24 @@ const CustomButton = ({
   aSelf,
   type,
   disabled,
-}) => {
-  return (
-    <PrimaryButton
-      aself={aSelf}
-      text={tAlign}
-      margint={mTop}
-      marginb={mBottom}
-      marginr={mRight}
-      marginl={mLeft}
-      bradius={border}
-      widthsize={width}
-      heightsize={height}
-      buttoncolor={bColor}
-      onClick={onUserPress}
-      type={type}
-      disabled={disabled}
-    >
-      {children}
-    </PrimaryButton>
-  );
-};
+}) => (
+  <PrimaryButton
+    aself={aSelf}
+    text={tAlign}
+    margint={mTop}
+    marginb={mBottom}
+    marginr={mRight}
+    marginl={mLeft}
+    bradius={border}
+    widthsize={width}
+    heightsize={height}
+    buttoncolor={bColor}
+    onClick={onUserPress}
+    type={type}
+    disabled={disabled}
+  >
+    {children}
+  </PrimaryButton>
+);
+
 export default CustomButton;

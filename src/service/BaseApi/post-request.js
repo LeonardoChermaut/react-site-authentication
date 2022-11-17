@@ -1,5 +1,5 @@
-import AlertRequest from "../../component/Alert/AlertRequest";
 import api from "./Api";
+import AlertRequest from "../../component/Alert/AlertRequest";
 
 const RegisterUser = async (request) => {
   try {

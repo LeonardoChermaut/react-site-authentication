@@ -1,11 +1,11 @@
 import React from "react";
+import API_URL from "../service/BaseApi/Api";
 import { createContext, useEffect, useState } from "react";
 import AlertRequest from "../component/Alert/AlertRequest";
-import API_URL from "../service/BaseApi/Api";
 
 export const UserContext = createContext();
 export const UserProvider = ({ children }) => {
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState("");
 
   useEffect(() => {
     const userToken = async () => localStorage.getItem("token");

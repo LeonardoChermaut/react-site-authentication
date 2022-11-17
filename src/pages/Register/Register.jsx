@@ -8,7 +8,7 @@ import CustomButton from "../../component/Buttom/Buttom";
 import register from "../../service/BaseApi/post-request";
 
 const Register = () => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
@@ -22,15 +22,15 @@ const Register = () => {
 
   const returnLogin = () => navigate("/login");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const bodyRequest = {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const user = {
       nome: nome,
       sobrenome: sobrenome,
       email: email,
       senha: senha,
     };
-    register(bodyRequest);
+    register(user);
   };
 
   return (
@@ -47,11 +47,13 @@ const Register = () => {
             <Col>
               <CustomForm
                 placeholder="Nome"
+                autoComplete="on"
                 onChange={(e) => setNome(e.target.value)}
               />
 
               <CustomForm
                 placeholder="Sobrenome"
+                autoComplete="on"
                 onChange={(e) => setSobrenome(e.target.value)}
               />
 
@@ -59,6 +61,7 @@ const Register = () => {
                 autoFocus
                 type="email"
                 value={email}
+                autoComplete="on"
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Email"
               />
@@ -66,6 +69,7 @@ const Register = () => {
                 placeholder="Senha"
                 type="password"
                 value={senha}
+                autoComplete="on"
                 onChange={(e) => setSenha(e.target.value)}
               />
             </Col>

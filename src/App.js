@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useContext } from "react";
 import Login from "./pages/Login/Login";
 import Home from "./pages/Home/Home";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -9,7 +9,7 @@ import UserPerfil from "./pages/Perfil/Profile";
 import Context from "./context/index";
 
 const App = function () {
-  const { signed } = React.useContext(Context);
+  const { signed } = useContext(Context);
 
   return (
     <>
