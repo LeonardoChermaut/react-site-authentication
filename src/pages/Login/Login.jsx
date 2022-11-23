@@ -1,19 +1,18 @@
 import { React, useState, useContext } from "react";
 import Form from "react-bootstrap/Form";
 import Context from "../../context/index";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Title from "../../component/Title/Title";
 import CustomButton from "../../component/Buttom/Buttom";
 import { ContainerInput, CustomForm, FormLogin } from "./Styled";
 import Register from "../Register/Register";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const { signIn, signed } = useContext(Context);
-
   const validateForm = () => email.length > 0 && senha.length > 0;
-  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
