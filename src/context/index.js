@@ -2,20 +2,22 @@ import React from "react";
 import API_URL from "../service/BaseApi/Api";
 import { createContext, useEffect, useState } from "react";
 import AlertRequest from "../component/Alert/AlertRequest";
+import history from "../history/index";
 
 export const UserContext = createContext();
+
 export const UserProvider = ({ children }) => {
   const [token, setToken] = useState("");
 
   useEffect(() => {
-    const userToken = async () => localStorage.getItem("token");
-    if (userToken) {
-      setToken(userToken);
+    const token = localStorage.getItem("token");
+    if (token) {
+      setToken(token);
     }
   }, []);
 
-  const signIn = (data) => {
-    const response = API_URL.post("/login", data);
+  const signIn = async (user) => {
+    const response = await API_URL.post("/login", user);
     try {
       setToken(response.data);
       API_URL.defaults.headers.common[
@@ -30,14 +32,19 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  const signOut = () => localStorage.clear();
+  const signOut = () => {
+    setToken("");
+    localStorage.clear();
+    API_URL.defaults.headers.common["Authorization"] = undefined;
+    history.push("/login");
+  };
 
   return (
     <UserContext.Provider
       value={{
         token,
-        signed: !!token,
         signIn,
+        signed: !!token,
         signOut,
       }}
     >
