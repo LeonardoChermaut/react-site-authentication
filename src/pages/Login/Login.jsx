@@ -5,31 +5,30 @@ import { useNavigate } from "react-router-dom";
 import Title from "../../component/tittle/Title";
 import CustomButton from "../../component/buttom/Buttom";
 import { ContainerInput, CustomForm, FormLogin } from "./Styled";
-import Register from "../Register/Register";
+
 
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
-  const { signIn, signed } = useContext(Context);
-  const validateForm = () => email.length > 0 && senha.length > 0;
+  const [password, setPassword] = useState("");
+  const { signIn } = useContext(Context);
 
+  const validateForm = () => email.length > 0 && password.length > 0;
+  // const registerPage = navigate("/register");
+  
   const handleSubmit = (e) => {
     e.preventDefault();
-    const user = { email: email, senha: senha };
+    const user = { email: email, password: password };
     signIn(user);
   };
 
-  if (signed) {
-    navigate("/home");
-  } else {
     return (
       <section>
         <ContainerInput>
           <Title fSize="30px" tAlign="center" mBottom="2rem" mTop="1rem">
             Faça seu login
           </Title>
-          <FormLogin onSubmit={() => handleSubmit()}>
+          <FormLogin onSubmit={handleSubmit}>
             <Form.Group size="lg" controlId="email">
               <Form.Label>Email</Form.Label>
 
@@ -46,8 +45,8 @@ const Login = () => {
               <Form.Control
                 autoFocus
                 type="password"
-                value={senha}
-                onChange={(e) => setSenha(e.target.value)}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </Form.Group>
 
@@ -59,7 +58,7 @@ const Login = () => {
             >
               Login
             </CustomButton>
-            <CustomButton mTop="1rem" onUserPress={Register} bColor="grey">
+            <CustomButton mTop="1rem"  bColor="grey">
               Registrar
             </CustomButton>
           </FormLogin>
@@ -67,6 +66,6 @@ const Login = () => {
       </section>
     );
   }
-};
+
 
 export default Login;

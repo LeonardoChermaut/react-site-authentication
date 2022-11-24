@@ -9,7 +9,7 @@ import {
   Toggle,
 } from "./Styled";
 import CustomButton from "../buttom/Buttom";
-import GetUserContex from "../../service/BaseApi/get-request";
+import GetUserContex from "../../service/localhost-api/getUserByContex";
 import { useNavigate } from "react-router-dom";
 import Title from "../tittle/Title";
 

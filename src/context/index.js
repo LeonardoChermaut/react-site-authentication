@@ -1,40 +1,46 @@
 import React from "react";
-import API_URL from "../service/BaseApi/Api";
 import { createContext, useEffect, useState } from "react";
 import AlertRequest from "../component/alert/AlertRequest";
+import createBrowserHistory from "../history/index" 
+import TOKEN from "../service/localhost-api/getToken";
+import LOCALHOST from "../service/localhost-api/Api";
 
 export const UserContext = createContext();
+const history = createBrowserHistory();
 
 export const UserProvider = ({ children }) => {
   const [token, setToken] = useState("");
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      setToken(token);
-    }
+  useEffect(() => {(() => {
+      if (TOKEN) {
+      setToken(TOKEN);
+    }})();
   }, []);
 
   const signIn = async (user) => {
-    const response = await API_URL.post("/login", user);
+    const response = await LOCALHOST.post("/login", user);
+    console.log("ERROR")
+    console.log(user);
+    setToken(response.data);
     try {
-      setToken(response.data);
-      API_URL.defaults.headers.common[
+      response.defaults.headers.common[
         "Authorization"
-      ] = `Bearer ${response.data}`;
-      localStorage.setItem("token", response.data);
+      ] = `Bearer ${token}`
+      ;
+      localStorage.setItem("token", token);
     } catch (e) {
-      AlertRequest({
-        title: "Usuário ou senha inválida",
-        icon: "error",
-      });
+      // AlertRequest({
+      //   title: `${e}`,
+      //   icon: "error",
+      // });
+      alert(e)
     }
   };
 
   const signOut = () => {
     setToken("");
     localStorage.clear();
-    API_URL.defaults.headers.common["Authorization"] = undefined;
+    LOCALHOST.defaults.headers.common["Authorization"] = undefined;
     history.push("/login");
   };
 

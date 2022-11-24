@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import { Row, Col, Container } from "react-bootstrap";
-import Navbar from "../../component/Navbar/Navbar";
-import GetUserContext from "../../service/BaseApi/get-request";
+import Navbar from "../../component/navbar/Navbar";
+import GetUserContext from "../../service/localhost-api/getUserByContex";
 
 const UserPerfil = () => {
   const [user, setUser] = useState([]);

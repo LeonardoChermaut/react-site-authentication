@@ -1,6 +1,6 @@
 import React from "react";
 import { CDBBox, CDBFooter, CDBIcon } from "cdbreact";
-import CustomButton from "../Buttom/Buttom";
+import CustomButton from "../buttom/Buttom";
 
 const Footer = () => (
   <CDBFooter

@@ -4,7 +4,7 @@ import Home from "./pages/Home/Home";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Register from "./pages/Register/Register";
-import Footer from "./component/Footer/Footer";
+import Footer from "../src/component/footer/Footer";
 import UserPerfil from "./pages/Perfil/Profile";
 import Context from "./context/index";
 
@@ -17,7 +17,6 @@ const App = function () {
         <Route index path="*" element={<Navigate to="/login" replace />} />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
-
         {signed ? (
           <>
             <Route exact path="/home" element={<Home />} />
@@ -26,6 +25,7 @@ const App = function () {
         ) : (
           <Route exact path="/login" element={<Login />} />
         )}
+
       </Routes>
       <Footer />
     </>

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { ContainerInput, CustomForm, FormRegister } from "./Styled";
-import { useNavigate } from "react-router-dom";
-import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import Title from "../../component/Title/Title";
-import CustomButton from "../../component/Buttom/Buttom";
-import register from "../../service/BaseApi/post-request";
+import Col from "react-bootstrap/Col";
+import { useNavigate } from "react-router-dom";
+import Title from "../../component/tittle/Title";
+import CustomButton from "../../component/buttom/Buttom";
+import register from "../../service/localhost-api/createUser";
+import { ContainerInput, CustomForm, FormRegister } from "./Styled";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -13,6 +13,8 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [sobrenome, setSobrenome] = useState("");
+  
+  const returnLogin = () => navigate("/login");
 
   const validateForm = () =>
     nome.length > 2 &&
@@ -20,9 +22,7 @@ const Register = () => {
     email.length > 10 &&
     senha.length > 7;
 
-  const returnLogin = () => navigate("/login");
-
-  const handleSubmit = (event) => {
+const handleSubmit = (event) => {
     event.preventDefault();
     const user = {
       nome: nome,

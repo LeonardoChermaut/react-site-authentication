@@ -1,7 +1,7 @@
 import React from "react";
-import Navbar from "../../component/Navbar/Navbar";
-import Title from "../../component/Title/Title";
-import GetImages from "../../service/ImagesApi/get-request";
+import Navbar from "../../component/navbar/Navbar";
+import Title from "../../component/tittle/Title";
+import GetImages from "../../service/unsplash-api/getImages";
 
 const Home = () => (
   <>
