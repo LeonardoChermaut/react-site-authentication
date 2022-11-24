@@ -2,8 +2,8 @@ import { React, useState, useContext } from "react";
 import Form from "react-bootstrap/Form";
 import Context from "../../context/index";
 import { useNavigate } from "react-router-dom";
-import Title from "../../component/Title/Title";
-import CustomButton from "../../component/Buttom/Buttom";
+import Title from "../../component/tittle/Title";
+import CustomButton from "../../component/buttom/Buttom";
 import { ContainerInput, CustomForm, FormLogin } from "./Styled";
 
 const Login = () => {

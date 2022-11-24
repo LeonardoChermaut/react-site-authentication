@@ -1,7 +1,7 @@
 import React from "react";
 import API_URL from "../service/BaseApi/Api";
 import { createContext, useEffect, useState } from "react";
-import AlertRequest from "../component/Alert/AlertRequest";
+import AlertRequest from "../component/alert/AlertRequest";
 
 export const UserContext = createContext();
 export const UserProvider = ({ children }) => {
