@@ -2,17 +2,22 @@ import styled from "styled-components";
 import Container from "react-bootstrap/Container";
 
 export const ImagesContainer = styled(Container)`
-  display: grid;
-  grid-gap: 2rem;
-  margin-bottom: 20vh;
-  align-items: stretch;
-  justify-items: stretch;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  display: flex;
+  flex-wrap: wrap;
 `;
 
 export const Images = styled.img`
-  width: 100%;
-  border-radius: 10px;
+  width: 25%;
+  flex: 1;
+  margin: 1rem;
+  border-radius: 0.8rem;
+  transition: transform 0.2s;
   -webkit-box-shadow: 0px 0px 47px -3px rgba(0, 0, 0, 0.35);
   box-shadow: 0px 0px 47px -3px rgba(0, 0, 0, 0.35);
+
+  &:hover {
+    ms-transform: scale(1.1); /* IE 9 */
+    -webkit-transform: scale(1.1); /* Safari 3-8 */
+    transform: scale(1.08);
+  }
 `;
