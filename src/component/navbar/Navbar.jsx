@@ -12,15 +12,19 @@ import CustomButton from "../buttom/Buttom";
 import GetUserContex from "../../service/localhost-api/getUserByContex";
 import { useNavigate } from "react-router-dom";
 import Title from "../tittle/Title";
+import UserContext from "../../context";
 
 const Navbar = () => {
+  const { signOut } = React.useContext(UserContext);
+  
   const navigate = useNavigate();
 
-  const handleSignOut = () => {
-    localStorage.removeItem("token");
-    document.location.reload(true);
-    navigate("/login");
-  };
+  // const handleSignOut = () => {
+  //   signOut();
+  //   localStorage.removeItem("token");
+  //   document.location.reload(true);
+  //   navigate("/login");
+  // };
 
   const handlePerfil = () => navigate("/profile");
 
@@ -37,7 +41,7 @@ const Navbar = () => {
             <Link onClick={() => handleHome()}>Home</Link>
 
             <Link href="#">Sobre nós</Link>
-            <SignOutButtom onClick={() => handleSignOut()}>Sair</SignOutButtom>
+            <SignOutButtom onClick={() => signOut()}>Sair</SignOutButtom>
 
             <CustomButton
               width="50px"

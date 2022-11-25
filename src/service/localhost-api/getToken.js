@@ -1,5 +1,5 @@
- const token = localStorage.getItem("token"); 
+ const TOKEN = localStorage.getItem("token"); 
 
- export default token;
+ export default TOKEN;
 
 

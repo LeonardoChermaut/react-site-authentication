@@ -12,7 +12,6 @@ const RegisterUser = async (user) => {
           icon: "success",});
       };
     } catch(e) {
-      
         AlertRequest({
           title: `${e.response.data}`,
           icon: "error"});

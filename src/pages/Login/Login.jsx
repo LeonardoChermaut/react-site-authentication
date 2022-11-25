@@ -18,9 +18,14 @@ const Login = () => {
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    const user = { email: email, password: password };
+    const user = { email: email, senha: password };
     signIn(user);
-  };
+  }
+
+  if(signIn){
+    navigate("/home");
+  }
+  
 
     return (
       <section>
@@ -36,17 +41,17 @@ const Login = () => {
                 autoFocus
                 type="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={e => setEmail(e.target.value)}
               />
             </Form.Group>
 
-            <Form.Group size="lg" controlId="senha">
+            <Form.Group size="lg" controlId="password">
               <Form.Label>Senha</Form.Label>
               <Form.Control
                 autoFocus
                 type="password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={e => setPassword(e.target.value)}
               />
             </Form.Group>
 

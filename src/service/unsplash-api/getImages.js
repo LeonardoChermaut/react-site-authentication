@@ -2,12 +2,14 @@ import { React, useState, useEffect } from "react";
 import { Images, ImagesContainer } from "../../pages/Home/Styled";
 import UNSPLASH_API from "./Api";
 
-const getImages = () => {
+const GetImages = () => {
   const [images, setImages] = useState([]);
 
   useEffect(() => {
-    const requestApi = async () => await UNSPLASH_API.get().then(res => setImages(res.data));
-    requestApi();
+    (async () =>
+      await UNSPLASH_API.get()
+      .then(res => setImages(res.data)))
+   ();
   }, []);
 
   return (
@@ -18,4 +20,4 @@ const getImages = () => {
     </ImagesContainer>
   );
 };
-export default getImages;
+export default GetImages;

@@ -11,29 +11,21 @@ const history = createBrowserHistory();
 export const UserProvider = ({ children }) => {
   const [token, setToken] = useState("");
 
-  useEffect(() => {(() => {
-      if (TOKEN) {
-      setToken(TOKEN);
-    }})();
-  }, []);
+  useEffect(() => {(() => { TOKEN ? setToken(TOKEN) : setToken("")})()}, []);
 
   const signIn = async (user) => {
-    const response = await LOCALHOST.post("/login", user);
-    console.log("ERROR")
-    console.log(user);
-    setToken(response.data);
+    const API = await LOCALHOST.post("/login", user);
+    let { data: token } = API;
+    console.log(token)
     try {
-      response.defaults.headers.common[
-        "Authorization"
-      ] = `Bearer ${token}`
-      ;
+      setToken(token);
+      API.headers['Authorization'] = `Bearer ${token}`;
       localStorage.setItem("token", token);
     } catch (e) {
-      // AlertRequest({
-      //   title: `${e}`,
-      //   icon: "error",
-      // });
-      alert(e)
+      AlertRequest({
+        title: `${e}`,
+        icon: "error",
+      });
     }
   };
 
