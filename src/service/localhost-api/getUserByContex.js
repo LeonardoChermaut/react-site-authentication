@@ -4,10 +4,9 @@ import TOKEN from "./getToken";
 
 const GetUserContext = () => {
   const [user, setUser] = useState([]);
+  
   useEffect(() => {(async () => { 
-    const AUTH_TOKEN = {
-      headers: { 'Authorization': `Bearer ${TOKEN}`}
-    }
+    const AUTH_TOKEN = {headers: { 'Authorization': `Bearer ${TOKEN}`}}
     try {
         const API = await LOCALHOST_API.get(`/api/user/contex`, AUTH_TOKEN);
         let { data: user } =  API;

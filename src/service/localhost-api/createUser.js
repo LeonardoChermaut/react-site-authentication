@@ -1,19 +1,19 @@
 
 import LOCALHOST_API from "./Api";
-import AlertRequest from "../../component/alert/AlertRequest";
+import message from "../../component/alert/AlertRequest";
 
 const RegisterUser = async (user) => {
-  const response = await LOCALHOST_API.post("/api/user", user);
-  const data = await response;
   try {
-      if(data.status === 200 || 202) {
-        AlertRequest({
+    const response = await LOCALHOST_API.post("/api/user", user);
+    let { data: status } = response;
+      if(status === 200 || 202) {
+        message({
           title: "Cadastro com sucesso",
           icon: "success",});
       };
     } catch(e) {
-        AlertRequest({
-          title: `${e.response.data}`,
+      message({
+          title: `${e.data}`,
           icon: "error"});
   }}
 

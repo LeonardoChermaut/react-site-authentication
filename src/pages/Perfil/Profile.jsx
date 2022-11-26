@@ -1,5 +1,6 @@
 import { React, useState } from "react";
 import { Row, Col, Container } from "react-bootstrap";
+import CustomButton from "../../component/buttom/Buttom";
 import Navbar from "../../component/navbar/Navbar";
 import GetUserContext from "../../service/localhost-api/getUserByContex";
 
@@ -10,7 +11,7 @@ const UserPerfil = () => {
   return (
     <>
       <Navbar />
-      <Container style={{ marginTop: "2rem" }}>
+      <Container fluid style={{ marginBottom: "3rem" }}>
         <Row>
           <Col className="col-md-3 border-right">
             <Col className="d-flex flex-column align-items-center text-center p-3 py-5">
@@ -64,11 +65,7 @@ const UserPerfil = () => {
                   placeholder="senha"
                 />
               </div>
-            </div>
-            <div className="mt-5 text-center">
-              <button className="btn btn-primary profile-button" type="button">
-                Salvar
-              </button>
+              <CustomButton mTop="2rem"> Salvar </CustomButton>
             </div>
           </Col>
         </Row>

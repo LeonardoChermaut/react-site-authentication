@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import Container from "react-bootstrap/Container";
 
-export const ImagesContainer = styled(Container)`
+export const GaleryContainer = styled(Container)`
   display: flex;
   flex-wrap: wrap;
 `;
 
-export const Images = styled.img`
+export const ImagesGalery = styled.img`
   width: 25%;
   flex: 1;
   margin: 1rem;

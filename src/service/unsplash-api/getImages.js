@@ -1,23 +1,21 @@
 import { React, useState, useEffect } from "react";
-import { Images, ImagesContainer } from "../../pages/Home/Styled";
+import { ImagesGalery, GaleryContainer } from "../../pages/Home/Styled";
 import UNSPLASH_API from "./Api";
 
-const GetImages = () => {
+export default function GetImages() {
   const [images, setImages] = useState([]);
 
-  useEffect(() => {
-    (async () =>
-      await UNSPLASH_API.get()
-      .then(res => setImages(res.data)))
-   ();
+  useEffect(() => {(async() => {
+      const API = await UNSPLASH_API.get();
+      let { data: images } = API;
+      setImages(images);
+    })();
   }, []);
 
   return (
-    <ImagesContainer>
-      {images.map((img) => (
-        <Images key={img.id} src={img.urls.full} />
-      ))}
-    </ImagesContainer>
+    <GaleryContainer>
+      {images.map(img => (<ImagesGalery key={img.id} src={img.urls.full} />))}
+    </GaleryContainer>
   );
 };
-export default GetImages;
+

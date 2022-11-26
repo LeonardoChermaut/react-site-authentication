@@ -16,8 +16,10 @@ const CustomButton = ({
   aSelf,
   type,
   disabled,
+  hover,
 }) => (
   <PrimaryButton
+  hover= {hover}
     aself={aSelf}
     text={tAlign}
     margint={mTop}

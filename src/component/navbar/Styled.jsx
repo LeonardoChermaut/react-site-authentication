@@ -3,7 +3,12 @@ import Navbar from "react-bootstrap/Navbar";
 import Col from "react-bootstrap/esm/Col";
 
 export const NavbarStyled = styled(Navbar)`
+  display: flex;
+  justify-content: flex-end;
   background-color: #161616;
+  @media (max-width: 600px) {
+    justify-content: space-evenly;
+  }
 `;
 
 export const ColNav = styled(Col)`
@@ -31,12 +36,14 @@ export const Toggle = styled(Navbar.Toggle)`
 
 export const Link = styled.a`
   color: #fff;
-  margin-right: 3rem;
-  margin-top: 0.18rem;
+  margin-right: 2rem;
   padding: 0.9rem;
   text-decoration: none;
   &:hover {
     color: #ffa600;
+  }
+  @media (max-width: 600px) {
+    margin-right: 1rem;
   }
 `;
 

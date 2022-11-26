@@ -6,7 +6,6 @@ import Title from "../../component/tittle/Title";
 import CustomButton from "../../component/buttom/Buttom";
 import { ContainerInput, CustomForm, FormLogin } from "./Styled";
 
-
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -14,7 +13,7 @@ const Login = () => {
   const { signIn } = useContext(Context);
 
   const validateForm = () => email.length > 0 && password.length > 0;
-  // const registerPage = navigate("/register");
+  const registerPage = () => navigate("/register");
   
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,10 +24,9 @@ const Login = () => {
   if(signIn){
     navigate("/home");
   }
-  
 
     return (
-      <section>
+
         <ContainerInput>
           <Title fSize="30px" tAlign="center" mBottom="2rem" mTop="1rem">
             Faça seu login
@@ -63,12 +61,12 @@ const Login = () => {
             >
               Login
             </CustomButton>
-            <CustomButton mTop="1rem"  bColor="grey">
+            <CustomButton mTop="1rem"  bColor="grey" onUserPress={registerPage}>
               Registrar
             </CustomButton>
           </FormLogin>
         </ContainerInput>
-      </section>
+
     );
   }
 
