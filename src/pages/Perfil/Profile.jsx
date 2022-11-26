@@ -1,12 +1,12 @@
-import { React, useState } from "react";
+import { React, useState , useEffect} from "react";
 import { Row, Col, Container } from "react-bootstrap";
 import CustomButton from "../../component/buttom/Buttom";
 import Navbar from "../../component/navbar/Navbar";
-import GetUserContext from "../../service/localhost-api/getUserByContex";
+import getUser from "../../service/localhost-api/getUserByContex";
 
 const UserPerfil = () => {
   const [user, setUser] = useState([]);
-  const { contex } = GetUserContext;
+  getUser().then(data => setUser(data));
 
   return (
     <>
@@ -20,8 +20,8 @@ const UserPerfil = () => {
                 width="150px"
                 src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
               />
-              <span className="font-weight-bold">Nome Usuário</span>
-              <span className="text-black-50">email@usuario.com.br</span>
+              <span className="font-weight-bold">{user.nome}</span>
+              <span className="text-black-50">{user.email}</span>
               <span> </span>
             </Col>
           </Col>
@@ -36,7 +36,7 @@ const UserPerfil = () => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Nome"
+                  placeholder={user.nome}
                 />
               </Col>
               <Col className="col-md-12">
@@ -44,7 +44,7 @@ const UserPerfil = () => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="sobrenome"
+                  placeholder={user.sobrenome}
                 />
               </Col>
 
@@ -53,7 +53,7 @@ const UserPerfil = () => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Email"
+                  placeholder={user.email}
                 />
               </Col>
 
@@ -62,7 +62,7 @@ const UserPerfil = () => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="senha"
+                  placeholder="************"
                 />
               </div>
               <CustomButton mTop="2rem"> Salvar </CustomButton>

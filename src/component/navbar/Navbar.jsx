@@ -16,7 +16,7 @@ const Navbar = () => {
     <NavbarStyled expand="lg" sticky="top">
       <Link onClick={toHome}>Home</Link>
       <Link href="#">Sobre nós</Link>
-      <SignOutButtom onClick={() => signOut}>Sair</SignOutButtom>
+      <SignOutButtom onClick={()=> signOut()}>Sair</SignOutButtom>
       <CustomButton width="50px" height="60px" mLeft="1rem" mRight="1rem" onUserPress={toProfile} >
         <svg width="30" height="35" fill="currentColor" viewBox="0 0 16 16" className="bi bi-person" 
         xmlns="http://www.w3.org/2000/svg" 

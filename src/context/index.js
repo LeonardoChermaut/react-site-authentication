@@ -1,38 +1,37 @@
 import React from "react";
 import { createContext, useEffect, useState } from "react";
-import AlertRequest from "../component/alert/AlertRequest";
+import alert from "../component/alert/AlertRequest";
 import createBrowserHistory from "../history/index" 
-import TOKEN from "../service/localhost-api/getToken";
+import isToken from "../service/localhost-api/getToken";
 import LOCALHOST from "../service/localhost-api/Api";
 
 export const UserContext = createContext();
-const history = createBrowserHistory();
 
-export const UserProvider = ({ children }) => {
+export function UserProvider({ children }){
+  const history = createBrowserHistory();
   const [token, setToken] = useState("");
 
-  useEffect(() => {(() => { TOKEN ? setToken(TOKEN) : setToken("")})()}, []);
+  const intercepetToken = (token) => {
+    setToken(token);
+    localStorage.setItem("token", token);
+  }
+
+  useEffect(() => {(() => { isToken ? setToken(isToken) : setToken("")})()}, []);
 
   const signIn = async (user) => {
     const API = await LOCALHOST.post("/login", user);
-    let { data: token } = API;
-    console.log(token)
+    const { data: token } = API;
     try {
-      setToken(token);
-      API.headers['Authorization'] = `Bearer ${token}`;
-      localStorage.setItem("token", token);
+      intercepetToken(token);
+      API.headers["Authorization"] = `Bearer ${token}`;
     } catch (e) {
-      AlertRequest({
-        title: `${e}`,
-        icon: "error",
-      });
+      alert({title: `${e}`, icon: "error",});
     }
   };
 
   const signOut = () => {
     setToken("");
-    localStorage.clear();
-    LOCALHOST.defaults.headers.common["Authorization"] = undefined;
+    localStorage.removeItem("token", token);
     history.push("/login");
   };
 
@@ -40,8 +39,8 @@ export const UserProvider = ({ children }) => {
     <UserContext.Provider
       value={{
         token,
-        signIn,
         signed: !!token,
+        signIn,
         signOut,
       }}
     >
