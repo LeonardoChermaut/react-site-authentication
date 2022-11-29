@@ -1,7 +1,7 @@
 import { React, useState, useContext } from "react";
 import Form from "react-bootstrap/Form";
 import Context from "../../context/index";
-import { useNavigate, Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Title from "../../component/tittle/Title";
 import CustomButton from "../../component/Buttom/Buttom";
 import { ContainerInput, CustomForm, FormLogin } from "./Styled";
@@ -19,10 +19,10 @@ const Login = () => {
     e.preventDefault();
     const user = { email: email, senha: password };
     signIn(user);
+    if (signed) {
+      navigate("/home");
+    }
   };
-  if (signed) {
-    navigate("/home");
-  }
   return (
     <ContainerInput>
       <Title fSize="30px" tAlign="center" mBottom="2rem" mTop="1rem">

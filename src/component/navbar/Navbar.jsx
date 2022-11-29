@@ -1,6 +1,6 @@
-import React from "react";
+import { React, useContext } from "react";
 import Title from "../tittle/Title";
-import UserContext from "../../context";
+import UserProvider from "../../context";
 import CustomButton from "../Buttom/Buttom";
 import { useNavigate } from "react-router-dom";
 import { NavbarStyled, Link, SignOutButtom } from "./Styled";
@@ -9,7 +9,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const toHome = () => navigate("/home");
   const toProfile = () => navigate("/profile");
-  const { signOut } = React.useContext(UserContext);
+  const { signOut } = useContext(UserProvider);
 
   return (
     <NavbarStyled expand="lg" sticky="top">

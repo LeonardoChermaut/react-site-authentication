@@ -1,24 +1,23 @@
 import React from "react";
 import { createContext, useEffect, useState } from "react";
 import createBrowserHistory from "../history/index";
-import isToken from "../service/localhost-api/getToken";
-import { LOCALHOST_API } from "../service/localhost-api/Api";
+import { LOCALHOST_API, TOKEN } from "../service/localhost-api/Api";
 import { AlertRequest } from "../component/Alert/AlertRequest";
 
 export const UserContext = createContext();
 
 export function UserProvider({ children }) {
-  const history = createBrowserHistory();
+  let history = createBrowserHistory();
   const [token, setToken] = useState("");
 
-  const intercepetToken = (token) => {
+  const addStorage = (token) => {
     setToken(token);
     localStorage.setItem("token", token);
   };
 
   useEffect(() => {
     (() => {
-      isToken ? setToken(isToken) : setToken("");
+      TOKEN ? setToken(TOKEN) : setToken("");
     })();
   }, []);
 
@@ -26,7 +25,7 @@ export function UserProvider({ children }) {
     const api = await LOCALHOST_API.post("/login", user);
     const { data: token } = api;
     try {
-      intercepetToken(token);
+      addStorage(token);
     } catch (e) {
       AlertRequest({ title: `${e}`, icon: "error" });
     }
@@ -34,16 +33,20 @@ export function UserProvider({ children }) {
 
   const signOut = () => {
     setToken("");
-    localStorage.removeItem("token", token);
-    history.push("/login");
+    localStorage.clear();
+    localStorage.removeItem("token");
+    if (!localStorage.getItem("token")) {
+      history.push("/login");
+      window.location.reload();
+    }
   };
 
   return (
     <UserContext.Provider
       value={{
+        signIn,
         token,
         signed: !!token,
-        signIn,
         signOut,
       }}
     >
