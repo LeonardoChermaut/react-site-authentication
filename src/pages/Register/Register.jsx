@@ -3,8 +3,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { useNavigate } from "react-router-dom";
 import Title from "../../component/tittle/Title";
-import CustomButton from "../../component/buttom/Buttom";
-import {RegisterUser}from "../../service/localhost-api/createUser";
+import CustomButton from "../../component/Buttom/Buttom";
+import { RegisterUser } from "../../service/localhost-api/createUser";
 import { ContainerInput, CustomForm, FormRegister } from "./Styled";
 
 const Register = () => {
@@ -13,7 +13,7 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [sobrenome, setSobrenome] = useState("");
-  
+
   const returnLogin = () => navigate("/login");
 
   const validateForm = () =>
@@ -22,7 +22,7 @@ const Register = () => {
     email.length > 10 &&
     senha.length > 7;
 
-const handleSubmit = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     const user = {
       nome: nome,

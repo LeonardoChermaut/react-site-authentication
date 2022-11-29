@@ -1,12 +1,12 @@
-import { React, useState , useEffect} from "react";
+import { React, useState } from "react";
 import { Row, Col, Container } from "react-bootstrap";
-import CustomButton from "../../component/buttom/Buttom";
+import CustomButton from "../../component/Buttom/Buttom";
 import Navbar from "../../component/navbar/Navbar";
 import getUser from "../../service/localhost-api/getUserByContex";
 
 const UserPerfil = () => {
   const [user, setUser] = useState([]);
-  getUser().then(user => setUser(user));
+  getUser().then((user) => setUser(user));
 
   return (
     <>

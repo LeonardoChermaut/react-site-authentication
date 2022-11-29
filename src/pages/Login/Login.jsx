@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import Context from "../../context/index";
 import { useNavigate, Navigate } from "react-router-dom";
 import Title from "../../component/tittle/Title";
-import CustomButton from "../../component/buttom/Buttom";
+import CustomButton from "../../component/Buttom/Buttom";
 import { ContainerInput, CustomForm, FormLogin } from "./Styled";
 
 const Login = () => {
@@ -19,7 +19,6 @@ const Login = () => {
     e.preventDefault();
     const user = { email: email, senha: password };
     signIn(user);
-    
   };
   if (signed) {
     navigate("/home");

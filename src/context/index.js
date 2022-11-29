@@ -1,9 +1,9 @@
 import React from "react";
 import { createContext, useEffect, useState } from "react";
-import alert from "../component/alert/AlertRequest";
 import createBrowserHistory from "../history/index";
 import isToken from "../service/localhost-api/getToken";
-import {LOCALHOST_API} from "../service/localhost-api/Api";
+import { LOCALHOST_API } from "../service/localhost-api/Api";
+import { AlertRequest } from "../component/Alert/AlertRequest";
 
 export const UserContext = createContext();
 
@@ -23,13 +23,12 @@ export function UserProvider({ children }) {
   }, []);
 
   const signIn = async (user) => {
-    const API = await LOCALHOST_API.post("/login", user);
-    const { data: token } = API;
+    const api = await LOCALHOST_API.post("/login", user);
+    const { data: token } = api;
     try {
       intercepetToken(token);
-      API.headers["Authorization"] = `Bearer ${token}`;
     } catch (e) {
-      alert({ title: `${e}`, icon: "error" });
+      AlertRequest({ title: `${e}`, icon: "error" });
     }
   };
 

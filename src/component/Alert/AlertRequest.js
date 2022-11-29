@@ -8,4 +8,3 @@ export const AlertRequest = ({ title, icon }) => {
     showConfirmButton: true,
   });
 };
-export default AlertRequest;
