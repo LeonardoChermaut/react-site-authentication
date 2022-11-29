@@ -4,7 +4,7 @@ import Col from "react-bootstrap/Col";
 import { useNavigate } from "react-router-dom";
 import Title from "../../component/tittle/Title";
 import CustomButton from "../../component/buttom/Buttom";
-import register from "../../service/localhost-api/createUser";
+import {RegisterUser}from "../../service/localhost-api/createUser";
 import { ContainerInput, CustomForm, FormRegister } from "./Styled";
 
 const Register = () => {
@@ -30,7 +30,7 @@ const handleSubmit = (event) => {
       email: email,
       senha: senha,
     };
-    register(user);
+    RegisterUser(user);
   };
 
   return (

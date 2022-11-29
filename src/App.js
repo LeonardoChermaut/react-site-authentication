@@ -1,17 +1,15 @@
-import { React, useContext, useEffect } from "react";
+import { React, useContext } from "react";
 import Login from "./pages/Login/Login";
 import Home from "./pages/Home/Home";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import Register from "./pages/Register/Register";
-import Footer from "../src/component/footer/Footer";
 import UserPerfil from "./pages/Perfil/Profile";
-import Context from "./context/index";
 import PrivateRoutes from "./router/PrivateRoutes";
+import {MemorizedFooter} from "./component/footer/Footer"
 
 export default function App() {
-  const { signIn: isLogged } = useContext(Context);
-  let navigate = useNavigate();
+  // let navigate = useNavigate();
 
   return (
     <>
@@ -31,6 +29,6 @@ export default function App() {
             } */}
           
       </Routes>
-      <Footer />
+      <MemorizedFooter />
     </>
   )};

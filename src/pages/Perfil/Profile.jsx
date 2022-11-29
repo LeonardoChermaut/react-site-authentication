@@ -6,7 +6,7 @@ import getUser from "../../service/localhost-api/getUserByContex";
 
 const UserPerfil = () => {
   const [user, setUser] = useState([]);
-  getUser().then(data => setUser(data));
+  getUser().then(user => setUser(user));
 
   return (
     <>

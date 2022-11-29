@@ -51,8 +51,6 @@ const Footer = () => (
         </CDBBox>
     </CDBBox>
   </CDBFooter>
-
-  
 );
 
-export default Footer;
+export const MemorizedFooter = React.memo(Footer);

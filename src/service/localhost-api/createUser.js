@@ -1,8 +1,7 @@
-
-import LOCALHOST_API from "./Api";
+import {LOCALHOST_API }from "./Api";
 import message from "../../component/alert/AlertRequest";
 
-const RegisterUser = async (user) => {
+export const RegisterUser = async (user) => {
   try {
     const response = await LOCALHOST_API.post("/api/user", user);
     let { data: status } = response;
@@ -12,9 +11,8 @@ const RegisterUser = async (user) => {
           icon: "success",});
       };
     } catch(e) {
+      console.error(e.data);
       message({
-          title: `${e.data}`,
+          title: "Erro ao efetuar o login",
           icon: "error"});
-  }}
-
-export default RegisterUser;
+  }};

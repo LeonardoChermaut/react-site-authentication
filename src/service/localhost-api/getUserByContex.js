@@ -1,23 +1,22 @@
 import { useState, useEffect } from "react";
-import LOCALHOST_API from "./Api";
+import {LOCALHOST_API} from "./Api";
 import TOKEN from "./getToken";
 
 const GetUserContext = async () => {
   const [user, setUser] = useState([]);
 
-  useEffect(() => {(async () => { 
-    const headers = {
-      headers: { 'Authorization': `Bearer ${TOKEN}`}
-    }
-    try {
-        const API = await LOCALHOST_API.get(`/api/user/contex`, headers);
-        const{ data: user } =  API;
+  useEffect(() => {
+    (async () => {
+      try {
+        const api = await LOCALHOST_API.get(`/api/user/contex`, );
+        const { data: user } = api;
         setUser(user);
-      }catch (e) {
+      } catch (e) {
         console.error(e);
-    }})();
+      }
+    })();
   }, []);
-  
+
   return user;
 };
 
