@@ -4,7 +4,7 @@ import Home from "./pages/Home/Home";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Register from "./pages/Register/Register";
-import UserPerfil from "./pages/Perfil/Profile";
+import UserProfile from "./pages/Profile/Profile";
 import { MemorizedFooter } from "./component/Footer/Footer";
 import Context from "../src/context/index";
 
@@ -19,11 +19,11 @@ export default function App() {
         <Route index path="*" element={<Navigate to="/login" replace />} />
         {signed ? (
           <>
-            <Route element={<Home />} path="/home" />
-            <Route element={<UserPerfil />} path="/profile" />
+            <Route element={<Home />} exact path="/home" />
+            <Route element={<UserProfile />} exact path="/profile" />
           </>
         ) : (
-          <Route exact path="/login" element={<Login />} />
+          <Route exact path="*" element={<Login />} />
         )}
       </Routes>
       <MemorizedFooter />

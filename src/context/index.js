@@ -44,9 +44,9 @@ export function UserProvider({ children }) {
   return (
     <UserContext.Provider
       value={{
-        signIn,
         token,
         signed: !!token,
+        signIn,
         signOut,
       }}
     >

@@ -15,7 +15,7 @@ const Navbar = () => {
     <NavbarStyled expand="lg" sticky="top">
       <Link onClick={toHome}>Home</Link>
       <Link href="#">Sobre nós</Link>
-      <SignOutButtom onClick={() => signOut()}>Sair</SignOutButtom>
+      <SignOutButtom onClick={signOut}>Sair</SignOutButtom>
       <CustomButton
         width="50px"
         height="60px"

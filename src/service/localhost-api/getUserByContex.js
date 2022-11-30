@@ -7,7 +7,7 @@ const GetUserContext = async () => {
   useEffect(() => {
     (async () => {
       try {
-        const { data: user } = await LOCALHOST_API.get(`/api/user/contex`, {
+        const { data: user } = await LOCALHOST_API.get(`/api/user/context`, {
           Authorization: `Bearer ${TOKEN}`,
         });
         setUser(user);
