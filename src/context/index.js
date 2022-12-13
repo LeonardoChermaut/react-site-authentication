@@ -23,7 +23,7 @@ export function UserProvider({ children }) {
 
   const signIn = async (user) => {
     const api = await LOCALHOST_API.post("/login", user);
-    const { data: token } = api;
+    const { data: token } = await api;
     try {
       addStorage(token);
     } catch (e) {

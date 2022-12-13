@@ -2,8 +2,8 @@ import { React, useState } from "react";
 import { Row, Col, Container, Modal } from "react-bootstrap";
 import CustomButton from "../../component/Buttom/Buttom";
 import Navbar from "../../component/navbar/Navbar";
-import getUser from "../../service/localhost-api/getUserByContex";
-import { UpdateUser } from "../../service/localhost-api/updateUser";
+import { GetUserByContext } from "../../service/localhost-api/GetUserByContext";
+import { UpdateUser } from "../../service/localhost-api/UpdateUser";
 
 const UserPerfil = () => {
   const [user, setUser] = useState([]);
@@ -15,7 +15,7 @@ const UserPerfil = () => {
   const handleHide = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  getUser().then((user) => {
+  GetUserByContext().then((user) => {
     mappedUser(user);
   });
 

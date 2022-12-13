@@ -4,7 +4,7 @@ import Col from "react-bootstrap/Col";
 import { useNavigate } from "react-router-dom";
 import Title from "../../component/tittle/Title";
 import CustomButton from "../../component/Buttom/Buttom";
-import { RegisterUser } from "../../service/localhost-api/createUser";
+import { RegisterUser } from "../../service/localhost-api/RegisterUser";
 import { ContainerInput, CustomForm, FormRegister } from "./Styled";
 
 const Register = () => {
