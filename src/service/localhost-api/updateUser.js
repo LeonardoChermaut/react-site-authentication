@@ -3,10 +3,9 @@ import { AlertRequest } from "../../component/Alert/AlertRequest";
 
 export const UpdateUser = async (user) => {
   try {
-    const response = await LOCALHOST_API.put(`/api/user/${user.id}`, user, {
+    const { data: status } = await LOCALHOST_API.put(`/api/user/${user.id}`, user, {
       Authorization: `Bearer ${TOKEN}`,
     });
-    const { data: status } = response;
     if (status === 200 || 202) {
       AlertRequest({
         title: "Atualização com sucesso",

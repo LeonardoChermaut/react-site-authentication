@@ -12,12 +12,12 @@ export const Profile = () => {
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
 
-  const mappedUser = (user) => {
-    const { nome: name, email, sobrenome: lastname } = user;
+  const mappedUser = async (user) => {
+    const { nome: name, email, sobrenome: lastName } = await user;
     setUser(user);
     setName(name);
     setEmail(email);
-    setLastName(lastname);
+    setLastName(lastName);
   };
 
   const update = () => {
@@ -47,8 +47,8 @@ export const Profile = () => {
                 width="150px"
                 src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
               />
-              <span className="font-weight-bold">{user.nome}</span>
-              <span className="text-black-50">{user.email}</span>
+              <span className="font-weight-bold">{name}</span>
+              <span className="text-black-50">{email}</span>
             </Col>
           </Col>
           <Col className="col-md-5 border-right">
@@ -95,7 +95,6 @@ export const Profile = () => {
                 mTop="1.5rem"
                 height="2.7rem"
                 hover="darkgreen"
-                onUserPress={() => update()}
               >
                 Salvar
               </CustomButton>

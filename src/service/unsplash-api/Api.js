@@ -1,7 +1,7 @@
 import axios from "axios";
-import TOKEN from "./token";
+import {TOKEN_UNSPLASH} from "./Token";
 
-const getUnsplashApi = axios.create({baseURL:`https://api.unsplash.com/photos/?client_id=${TOKEN}`});
+export const unsplashApi = axios.create({baseURL:`https://api.unsplash.com/photos/?client_id=${TOKEN_UNSPLASH}`});
 
-export default getUnsplashApi;
+
 

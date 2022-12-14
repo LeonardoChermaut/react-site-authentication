@@ -16,14 +16,10 @@ export const Register = () => {
 
   const returnLogin = () => navigate("/login");
 
-  const validateForm = () =>
-    nome.length > 2 &&
-    sobrenome.length > 4 &&
-    email.length > 10 &&
-    senha.length > 7;
+  const validateForm = () => nome.length > 2 && sobrenome.length > 4 && email.length > 10 && senha.length > 7;
 
   const handleSubmit = (event) => {
-    event.preventDefault();
+    event.preventDefault(); 
     const user = {
       nome: nome,
       sobrenome: sobrenome,

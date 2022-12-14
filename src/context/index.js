@@ -1,7 +1,7 @@
 import React from "react";
 import { createContext, useEffect, useState } from "react";
 import createBrowserHistory from "../history/index";
-import { LOCALHOST_API, TOKEN } from "../service/localhost-api/Api";
+import { LOCALHOST_API} from "../service/localhost-api/Api";
 import { AlertRequest } from "../component/Alert/AlertRequest";
 
 export const UserContext = createContext();
@@ -10,6 +10,8 @@ export const UserProvider = ({ children }) => {
   let history = createBrowserHistory();
   const [token, setToken] = useState("");
 
+  const TOKEN = localStorage.getItem("token");
+;
   const addStorage = (token) => {
     setToken(token);
     localStorage.setItem("token", token);
@@ -22,9 +24,9 @@ export const UserProvider = ({ children }) => {
   }, []);
 
   const signIn = async (user) => {
-    const api = await LOCALHOST_API.post("/login", user);
-    const { data: token } = await api;
     try {
+      const api = await LOCALHOST_API.post("/login", user);
+      const { data: token } = await api;
       addStorage(token);
     } catch (e) {
       AlertRequest({ title: `${e}`, icon: "error" });

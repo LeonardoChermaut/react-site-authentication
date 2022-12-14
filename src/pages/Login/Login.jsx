@@ -17,8 +17,8 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const user = { email: email, senha: password };
-    signIn(user);
+    const login = { email: email, senha: password };
+    signIn(login);
     if (signed) {
       navigate("/home");
     }

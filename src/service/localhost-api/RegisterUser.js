@@ -3,8 +3,7 @@ import { AlertRequest } from "../../component/Alert/AlertRequest";
 
 export const RegisterUser = async (user) => {
   try {
-    const response = await LOCALHOST_API.post("/api/user", user);
-    let { data: status } = response;
+    const { data: status } = await LOCALHOST_API.post("/api/user", user);
     if (status === 200 || 202) {
       AlertRequest({
         title: "Cadastro com sucesso",
