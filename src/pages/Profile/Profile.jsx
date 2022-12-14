@@ -1,23 +1,16 @@
-import { React, useState } from "react";
-import { Row, Col, Container, Modal } from "react-bootstrap";
+import { React, useState, useEffect } from "react";
+import { Row, Col, Container } from "react-bootstrap";
 import CustomButton from "../../component/Buttom/Buttom";
 import Navbar from "../../component/navbar/Navbar";
 import { GetUserByContext } from "../../service/localhost-api/GetUserByContext";
 import { UpdateUser } from "../../service/localhost-api/UpdateUser";
 
-const UserPerfil = () => {
+export const Profile = () => {
   const [user, setUser] = useState([]);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
-  const [show, setShow] = useState(false);
-  const handleHide = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  GetUserByContext().then((user) => {
-    mappedUser(user);
-  });
 
   const mappedUser = (user) => {
     const { nome: name, email, sobrenome: lastname } = user;
@@ -27,7 +20,7 @@ const UserPerfil = () => {
     setLastName(lastname);
   };
 
-  const update = async () => {
+  const update = () => {
     const request = {
       id: user.id,
       nome: name,
@@ -37,6 +30,10 @@ const UserPerfil = () => {
     };
     UpdateUser(request);
   };
+
+  GetUserByContext().then((user) => {
+    mappedUser(user);
+  });
 
   return (
     <>
@@ -52,7 +49,6 @@ const UserPerfil = () => {
               />
               <span className="font-weight-bold">{user.nome}</span>
               <span className="text-black-50">{user.email}</span>
-              <span> </span>
             </Col>
           </Col>
           <Col className="col-md-5 border-right">
@@ -67,7 +63,6 @@ const UserPerfil = () => {
                   type="text"
                   className="form-control"
                   placeholder={name}
-                  disabled
                 />
               </Col>
               <Col className="col-md-12">
@@ -76,85 +71,33 @@ const UserPerfil = () => {
                   type="text"
                   className="form-control"
                   placeholder={lastName}
-                  disabled
                 />
               </Col>
-
               <Col className="col-md-12">
                 <label className="labels">Email</label>
                 <input
                   type="email"
                   className="form-control"
                   placeholder={email}
-                  disabled
                 />
               </Col>
 
-              <div className="col-md-12">
+              <Col className="col-md-12">
                 <label className="labels">Senha</label>
                 <input
                   type="password"
                   className="form-control"
                   placeholder="****"
-                  disabled
                 />
-              </div>
-              <Modal show={show} onHide={() => handleHide()}>
-                <Modal.Header>
-                  <Modal.Title>Editar informações</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                  <label className="labels">Nome</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    value={`${name}`}
-                  />
-                  <label className="labels">Sobrenome</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    value={`${lastName}`}
-                  />
-                  <label className="labels">Email</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    value={`${email}`}
-                  />
-                  <label className="labels">Senha</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    placeholder="******"
-                  />
-                </Modal.Body>
-                <Modal.Footer>
-                  <CustomButton
-                    onUserPress={() => update()}
-                    bColor="black"
-                    height="2.7rem"
-                    hover="#0a3c01"
-                  >
-                    Salvar
-                  </CustomButton>
-                  <CustomButton
-                    onUserPress={() => handleHide()}
-                    mTop="0.5rem"
-                    bColor="black"
-                    hover="darkred"
-                    height="2.7rem"
-                  >
-                    Cancelar
-                  </CustomButton>
-                </Modal.Footer>
-              </Modal>
+              </Col>
               <CustomButton
-                onUserPress={() => handleShow()}
+                type="submit"
                 mTop="1.5rem"
                 height="2.7rem"
+                hover="darkgreen"
+                onUserPress={() => update()}
               >
-                Editar
+                Salvar
               </CustomButton>
             </div>
           </Col>
@@ -163,5 +106,3 @@ const UserPerfil = () => {
     </>
   );
 };
-
-export default UserPerfil;

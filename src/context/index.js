@@ -6,7 +6,7 @@ import { AlertRequest } from "../component/Alert/AlertRequest";
 
 export const UserContext = createContext();
 
-export function UserProvider({ children }) {
+export const UserProvider = ({ children }) => {
   let history = createBrowserHistory();
   const [token, setToken] = useState("");
 
@@ -53,6 +53,6 @@ export function UserProvider({ children }) {
       {children}
     </UserContext.Provider>
   );
-}
+};
 
 export default UserContext;

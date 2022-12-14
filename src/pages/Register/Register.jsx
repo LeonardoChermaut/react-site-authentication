@@ -7,7 +7,7 @@ import CustomButton from "../../component/Buttom/Buttom";
 import { RegisterUser } from "../../service/localhost-api/RegisterUser";
 import { ContainerInput, CustomForm, FormRegister } from "./Styled";
 
-const Register = () => {
+export const Register = () => {
   const navigate = useNavigate();
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
@@ -90,5 +90,3 @@ const Register = () => {
     </section>
   );
 };
-
-export default Register;

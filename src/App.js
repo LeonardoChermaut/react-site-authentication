@@ -3,8 +3,8 @@ import Login from "./pages/Login/Login";
 import Home from "./pages/Home/Home";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Routes, Route, Navigate } from "react-router-dom";
-import Register from "./pages/Register/Register";
-import UserProfile from "./pages/Profile/Profile";
+import { Register } from "./pages/Register/Register";
+import { Profile } from "./pages/Profile/Profile";
 import { MemorizedFooter } from "./component/Footer/Footer";
 import Context from "../src/context/index";
 
@@ -20,7 +20,7 @@ export default function App() {
         {signed ? (
           <>
             <Route element={<Home />} exact path="/home" />
-            <Route element={<UserProfile />} exact path="/profile" />
+            <Route element={<Profile />} exact path="/profile" />
           </>
         ) : (
           <Route exact path="*" element={<Login />} />
