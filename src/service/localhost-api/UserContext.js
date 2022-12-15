@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { LOCALHOST_API } from "./Api";
 
-export const GetUserByContext = async () => {
+export const UserContext = async () => {
   const [user, setUser] = useState([]);
   
   useEffect(() => {

@@ -5,13 +5,13 @@ import { LOCALHOST_API} from "../service/localhost-api/Api";
 import { AlertRequest } from "../component/Alert/AlertRequest";
 
 export const UserContext = createContext();
+const TOKEN = localStorage.getItem("token");
 
 export const UserProvider = ({ children }) => {
   let history = createBrowserHistory();
   const [token, setToken] = useState("");
 
-  const TOKEN = localStorage.getItem("token");
-;
+
   const addStorage = (token) => {
     setToken(token);
     localStorage.setItem("token", token);
@@ -25,8 +25,7 @@ export const UserProvider = ({ children }) => {
 
   const signIn = async (user) => {
     try {
-      const api = await LOCALHOST_API.post("/login", user);
-      const { data: token } = await api;
+      const { data: token } = await LOCALHOST_API.post("/login", user);
       addStorage(token);
     } catch (e) {
       AlertRequest({ title: `${e}`, icon: "error" });

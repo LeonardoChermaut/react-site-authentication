@@ -2,27 +2,34 @@ import { React, useState, useEffect } from "react";
 import { Row, Col, Container } from "react-bootstrap";
 import CustomButton from "../../component/Buttom/Buttom";
 import Navbar from "../../component/navbar/Navbar";
-import { GetUserByContext } from "../../service/localhost-api/GetUserByContext";
 import { UpdateUser } from "../../service/localhost-api/UpdateUser";
+import { UserContext } from "../../service/localhost-api/UserContext";
 
 export const Profile = () => {
   const [user, setUser] = useState([]);
+  const [id, setId] = useState(Number);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
 
-  const mappedUser = async (user) => {
-    const { nome: name, email, sobrenome: lastName } = await user;
-    setUser(user);
-    setName(name);
-    setEmail(email);
-    setLastName(lastName);
-  };
+  const context = async (mappedUser) => {
 
+    await mappedUser().then((user) => {
+      const {id, nome: name, email, sobrenome: lastName, senha: password} = user;
+      setId(id);
+      setUser(user);
+      setName(name);
+      setEmail(email);
+      setLastName(lastName);
+      setPassword(password);
+    })
+  }
+  context(UserContext);
+  
   const update = () => {
     const request = {
-      id: user.id,
+      id: id,
       nome: name,
       email: email,
       sobrenome: lastName,
@@ -31,9 +38,7 @@ export const Profile = () => {
     UpdateUser(request);
   };
 
-  GetUserByContext().then((user) => {
-    mappedUser(user);
-  });
+
 
   return (
     <>
@@ -87,7 +92,7 @@ export const Profile = () => {
                 <input
                   type="password"
                   className="form-control"
-                  placeholder="****"
+                  
                 />
               </Col>
               <CustomButton
