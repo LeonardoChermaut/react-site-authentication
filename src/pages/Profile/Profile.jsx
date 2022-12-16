@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React, useState } from "react";
 import { Row, Col, Container } from "react-bootstrap";
 import CustomButton from "../../component/Buttom/Buttom";
 import Navbar from "../../component/navbar/Navbar";
@@ -6,7 +6,6 @@ import { UpdateUser } from "../../service/localhost-api/UpdateUser";
 import { UserContext } from "../../service/localhost-api/UserContext";
 
 export const Profile = () => {
-  const [user, setUser] = useState([]);
   const [id, setId] = useState(Number);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -14,11 +13,9 @@ export const Profile = () => {
   const [password, setPassword] = useState("");
 
   const context = async (mappedUser) => {
-
     await mappedUser().then((user) => {
-      const {id, nome: name, email, sobrenome: lastName, senha: password} = user;
+      const { id, nome: name, email, sobrenome: lastName, senha: password } = user;
       setId(id);
-      setUser(user);
       setName(name);
       setEmail(email);
       setLastName(lastName);
@@ -26,8 +23,9 @@ export const Profile = () => {
     })
   }
   context(UserContext);
-  
-  const update = () => {
+
+  const update = (event) => {
+    event.preventDefault();
     const request = {
       id: id,
       nome: name,
@@ -37,8 +35,6 @@ export const Profile = () => {
     };
     UpdateUser(request);
   };
-
-
 
   return (
     <>
@@ -92,6 +88,7 @@ export const Profile = () => {
                 <input
                   type="password"
                   className="form-control"
+                  placeholder="********"
                   
                 />
               </Col>

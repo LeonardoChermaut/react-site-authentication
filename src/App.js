@@ -1,18 +1,18 @@
-import { React, useContext } from "react";
-import Login from "./pages/Login/Login";
-import Home from "./pages/Home/Home";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Fragment, React, useContext } from "react";
+import { Login } from "./pages/Login/Login";
+import { Home } from "./pages/Home/Home";
+import { Routes, Route, Navigate, redirect } from "react-router-dom";
 import { Register } from "./pages/Register/Register";
 import { Profile } from "./pages/Profile/Profile";
 import { MemorizedFooter } from "./component/Footer/Footer";
 import Context from "../src/context/index";
+import { PrivateRoute } from "./router/PrivateRoute";
 
-export default function App() {
+export const App = () => {
   const { signed } = useContext(Context);
 
   return (
-    <>
+    <Fragment>
       <Routes>
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
@@ -27,6 +27,6 @@ export default function App() {
         )}
       </Routes>
       <MemorizedFooter />
-    </>
+    </Fragment>
   );
 }

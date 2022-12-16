@@ -7,8 +7,7 @@ export const GetImages = () => {
 
   useEffect(() => {
     (async () => {
-      const api = await unsplashApi.get();
-      const { data: images } = await api;
+      const{ data: images } = await unsplashApi.get();
       setImages(images);
     })();
   }, []);

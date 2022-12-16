@@ -18,6 +18,5 @@ export const UserContext = async () => {
       }
     })();
   }, []);
-
   return user;
 };

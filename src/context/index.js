@@ -1,25 +1,21 @@
-import React from "react";
 import { createContext, useEffect, useState } from "react";
-import createBrowserHistory from "../history/index";
-import { LOCALHOST_API} from "../service/localhost-api/Api";
+import { LOCALHOST_API } from "../service/localhost-api/Api";
 import { AlertRequest } from "../component/Alert/AlertRequest";
 
 export const UserContext = createContext();
-const TOKEN = localStorage.getItem("token");
-
 export const UserProvider = ({ children }) => {
-  let history = createBrowserHistory();
-  const [token, setToken] = useState("");
-
-
+  const [user, setUser] = useState(null);
+  
   const addStorage = (token) => {
-    setToken(token);
     localStorage.setItem("token", token);
+    localStorage.setItem("user", JSON.stringify(token));
   };
-
+  
   useEffect(() => {
-    (() => {
-      TOKEN ? setToken(TOKEN) : setToken("");
+    (async function () {
+      const storageToken = localStorage.getItem("token");
+      const storageUser = localStorage.getItem("user");
+      storageToken && storageUser ? setUser(storageUser) : setUser(null);
     })();
   }, []);
 
@@ -27,26 +23,23 @@ export const UserProvider = ({ children }) => {
     try {
       const { data: token } = await LOCALHOST_API.post("/login", user);
       addStorage(token);
-    } catch (e) {
-      AlertRequest({ title: `${e}`, icon: "error" });
+
+    } catch (error) {
+      console.error(`error on sign in `, error);
+      AlertRequest({ title: `Ocorreu um erro`, icon: "error" });
     }
   };
 
   const signOut = () => {
-    setToken("");
+    setUser(null);
     localStorage.clear();
-    localStorage.removeItem("token");
-    if (!localStorage.getItem("token")) {
-      history.push("/login");
-      window.location.reload();
-    }
   };
 
   return (
     <UserContext.Provider
       value={{
-        token,
-        signed: !!token,
+        user,
+        signed: !!user,
         signIn,
         signOut,
       }}

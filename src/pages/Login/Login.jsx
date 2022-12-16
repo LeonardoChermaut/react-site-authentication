@@ -6,7 +6,7 @@ import Title from "../../component/tittle/Title";
 import CustomButton from "../../component/Buttom/Buttom";
 import { ContainerInput, CustomForm, FormLogin } from "./Styled";
 
-const Login = () => {
+export const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,12 +17,13 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const login = { email: email, senha: password };
-    signIn(login);
+    const user = { email: email, senha: password };
+    signIn(user);
     if (signed) {
       navigate("/home");
     }
   };
+  
   return (
     <ContainerInput>
       <Title fSize="30px" tAlign="center" mBottom="2rem" mTop="1rem">
@@ -63,5 +64,3 @@ const Login = () => {
     </ContainerInput>
   );
 };
-
-export default Login;

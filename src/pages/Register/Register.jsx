@@ -9,22 +9,22 @@ import { ContainerInput, CustomForm, FormRegister } from "./Styled";
 
 export const Register = () => {
   const navigate = useNavigate();
-  const [nome, setNome] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
-  const [sobrenome, setSobrenome] = useState("");
+  const [password, setPassword] = useState("");
+  const [lastName, setLastName] = useState("");
 
   const returnLogin = () => navigate("/login");
 
-  const validateForm = () => nome.length > 2 && sobrenome.length > 4 && email.length > 10 && senha.length > 7;
+  const validateForm = () => name.length > 2 && lastName.length > 4 && email.length > 10 && password.length > 7;
 
   const handleSubmit = (event) => {
     event.preventDefault(); 
     const user = {
-      nome: nome,
-      sobrenome: sobrenome,
+      nome: name,
+      sobrenome: lastName,
       email: email,
-      senha: senha,
+      senha: password,
     };
     RegisterUser(user);
   };
@@ -44,13 +44,13 @@ export const Register = () => {
               <CustomForm
                 placeholder="Nome"
                 autoComplete="on"
-                onChange={(e) => setNome(e.target.value)}
+                onChange={(e) => setName(e.target.value)}
               />
 
               <CustomForm
                 placeholder="Sobrenome"
                 autoComplete="on"
-                onChange={(e) => setSobrenome(e.target.value)}
+                onChange={(e) => setLastName(e.target.value)}
               />
 
               <CustomForm
@@ -64,9 +64,9 @@ export const Register = () => {
               <CustomForm
                 placeholder="Senha"
                 type="password"
-                value={senha}
+                value={password}
                 autoComplete="on"
-                onChange={(e) => setSenha(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </Col>
           </Row>

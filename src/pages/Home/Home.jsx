@@ -3,7 +3,7 @@ import Navbar from "../../component/navbar/Navbar";
 import Title from "../../component/tittle/Title";
 import {GetImages} from "../../service/unsplash-api/GetImages";
 
-const Home = () => (
+export const Home = () => (
   <>
     <Navbar />
     <section>
@@ -15,4 +15,3 @@ const Home = () => (
   </>
 );
 
-export default Home;
