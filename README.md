@@ -8,10 +8,9 @@
 
 #### Use the command to start project
 
-### `yarn start`or `npm start`
+### `yarn start` or `npm start`
 
-
-###Front-end with React JS
+### Front-end with React JS
 - [x] Styled Components
 - [x] Axios
 - [x] React Hoocks 
@@ -19,4 +18,4 @@
 - [x] GetUserContext
 - [x] Error Handling
 
-##This project is the second part of integration with [JAVA-BACK-END](https://github.com/LeonardoChermaut/java-backend-auth)
+## This project is the second part of integration with [JAVA-BACK-END](https://github.com/LeonardoChermaut/java-backend-auth)
