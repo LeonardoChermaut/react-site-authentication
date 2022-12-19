@@ -13,6 +13,8 @@
 - [x] Styled Components
 - [x] Axios
 - [x] React Hoocks 
+- [x] Register User
+- [x] Requests
 - [x] Validations 
 - [x] GetUserContext
 - [x] Error Handling
