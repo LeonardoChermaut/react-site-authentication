@@ -11,12 +11,11 @@ export const UserContext = async () => {
         const {data: user} = await LOCALHOST_API.get(`/api/user/context`, {
           Authorization: `Bearer ${token}`,
         });
-     
         setUser(user);
       } catch (error) {
         console.error('erro get user by context ', error);
       }
     })();
-  }, []);
+  }, [user]);
   return user;
 };

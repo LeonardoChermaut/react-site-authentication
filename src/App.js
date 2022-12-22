@@ -1,10 +1,10 @@
 import { Fragment, React } from "react";
-import { Login } from "./pages/Login/Login";
-import { Home } from "./pages/Home/Home";
+import { Login } from "./pages/login/Login";
+import { Home } from "./pages/home/Home";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { Register } from "./pages/Register/Register";
-import { Profile } from "./pages/Profile/Profile";
-import { MemorizedFooter } from "./component/Footer/Footer";
+import { Register } from "./pages/register/Register";
+import { Profile } from "./pages/profile/Profile";
+import { MemorizedFooter } from "./component/foorter/Footer";
 import { PrivateRoute } from "./router/PrivateRoute";
 
 export const App = () => {

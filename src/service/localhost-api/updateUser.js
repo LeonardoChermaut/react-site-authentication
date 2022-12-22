@@ -1,5 +1,5 @@
 import { LOCALHOST_API, TOKEN } from "./Api";
-import { AlertRequest } from "../../component/Alert/AlertRequest";
+import { AlertRequest } from "../../component/sweetalert/AlertRequest";
 
 export const UpdateUser = async (user) => {
   try {

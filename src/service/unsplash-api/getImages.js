@@ -1,13 +1,13 @@
 import { React, useState, useEffect } from "react";
-import { ImagesGalery, GaleryContainer } from "../../pages/Home/Styled";
-import {unsplashApi} from "./Api";
+import { ImagesGalery, GaleryContainer } from "../../pages/home/Styled";
+import { unsplashApi } from "./Api";
 
 export const GetImages = () => {
   const [images, setImages] = useState([]);
 
   useEffect(() => {
     (async () => {
-      const{ data: images } = await unsplashApi.get();
+      const { data: images } = await unsplashApi.get();
       setImages(images);
     })();
   }, []);
@@ -19,4 +19,4 @@ export const GetImages = () => {
       ))}
     </GaleryContainer>
   );
-}
+};

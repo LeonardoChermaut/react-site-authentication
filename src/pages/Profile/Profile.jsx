@@ -1,28 +1,47 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import { Row, Col, Container } from "react-bootstrap";
-import CustomButton from "../../component/Buttom/Buttom";
+import { Button } from "../../component/button/Button";
 import Navbar from "../../component/navbar/Navbar";
 import { UpdateUser } from "../../service/localhost-api/UpdateUser";
 import { UserContext } from "../../service/localhost-api/UserContext";
 
 export const Profile = () => {
-  const [id, setId] = useState(Number);
+  const [userDataContext, setUserDataContext] = useState([]);
+  const [id, setId] = useState();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
 
-  const context = async (mappedUser) => {
-    await mappedUser().then((user) => {
-      const { id, nome: name, email, sobrenome: lastName, senha: password } = user;
-      setId(id);
-      setName(name);
-      setEmail(email);
-      setLastName(lastName);
-      setPassword(password);
-    })
-  }
-  context(UserContext);
+  const convertContextToUser = async (context) => {
+    const data =  await context();
+    setUserDataContext(data);
+  };
+
+  convertContextToUser(UserContext);
+
+  //   Verify highorder map / this option 
+
+  // useEffect(() => {
+  //  (async () => {
+  //   const mappedUser = userDataContext.map((user) => {
+  //     const {
+  //       id,
+  //       nome: name,
+  //       email,
+  //       sobrenome: lastName,
+  //       senha: password,
+  //     } =  user;
+  //     setId(id);
+  //     setName(name);
+  //     setEmail(email);
+  //     setLastName(lastName);
+  //     setPassword(password);
+      
+  //   });
+  //  })();
+  // }, []);
+
 
   const update = (event) => {
     event.preventDefault();
@@ -48,8 +67,8 @@ export const Profile = () => {
                 width="150px"
                 src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
               />
-              <span className="font-weight-bold">{name}</span>
-              <span className="text-black-50">{email}</span>
+              <span className="font-weight-bold">{userDataContext.nome}</span>
+              <span className="text-black-50">{userDataContext.email}</span>
             </Col>
           </Col>
           <Col className="col-md-5 border-right">
@@ -57,13 +76,13 @@ export const Profile = () => {
               <div className="d-flex justify-content-between align-items-center mb-3">
                 <h4 className="text-right">Configuração do perfil</h4>
               </div>
-
               <Col className="col-md-12">
                 <label className="labels">Nome</label>
                 <input
                   type="text"
                   className="form-control"
-                  placeholder={name}
+                  placeholder={userDataContext.nome}
+                  onChange={(e) => setName(e.target.value)}
                 />
               </Col>
               <Col className="col-md-12">
@@ -71,7 +90,8 @@ export const Profile = () => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder={lastName}
+                  placeholder={userDataContext.sobrenome}
+                  onChange={(e) => setLastName(e.target.value)}
                 />
               </Col>
               <Col className="col-md-12">
@@ -79,27 +99,28 @@ export const Profile = () => {
                 <input
                   type="email"
                   className="form-control"
-                  placeholder={email}
+                  placeholder={userDataContext.email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </Col>
-
               <Col className="col-md-12">
                 <label className="labels">Senha</label>
                 <input
                   type="password"
                   className="form-control"
                   placeholder="********"
-                  
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </Col>
-              <CustomButton
+              <Button
                 type="submit"
                 mTop="1.5rem"
                 height="2.7rem"
                 hover="darkgreen"
+                onUserPress={() => update()}
               >
                 Salvar
-              </CustomButton>
+              </Button>
             </div>
           </Col>
         </Row>

@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../../component/navbar/Navbar";
-import Title from "../../component/tittle/Title";
+import {Title} from "../../component/tittle/Title";
 import {GetImages} from "../../service/unsplash-api/GetImages";
 
 export const Home = () => (

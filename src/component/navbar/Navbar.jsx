@@ -1,27 +1,27 @@
 import { React, useContext } from "react";
-import Title from "../tittle/Title";
-import UserProvider from "../../context";
-import CustomButton from "../Buttom/Buttom";
+import {Title }from "../tittle/Title";
+import UserProvider from "../../context/context";
+import {Button} from "../button/Button";
 import { useNavigate } from "react-router-dom";
 import { NavbarStyled, Link, SignOutButtom } from "./Styled";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const toHome = () => navigate("/home");
-  const toProfile = () => navigate("/profile");
+  const navigateToHome = () => navigate("/home");
+  const navigateToProfile = () => navigate("/profile");
   const { signOut } = useContext(UserProvider);
 
   return (
     <NavbarStyled expand="lg" sticky="top">
-      <Link onClick={toHome}>Home</Link>
+      <Link onClick={navigateToHome}>Home</Link>
       <Link href="#">Sobre nós</Link>
       <SignOutButtom onClick={signOut}>Sair</SignOutButtom>
-      <CustomButton
+      <Button
         width="50px"
         height="60px"
         mLeft="1rem"
         mRight="1rem"
-        onUserPress={toProfile}
+        onUserPress={navigateToProfile}
       >
         <svg
           width="30"
@@ -41,7 +41,7 @@ const Navbar = () => {
         <Title fSize="10px" fColor="#fff">
           Perfil
         </Title>
-      </CustomButton>
+      </Button>
     </NavbarStyled>
   );
 };

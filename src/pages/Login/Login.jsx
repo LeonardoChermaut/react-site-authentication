@@ -1,9 +1,9 @@
 import { React, useState, useContext } from "react";
 import Form from "react-bootstrap/Form";
-import Context from "../../context/index";
+import Context from "../../context/context";
 import { useNavigate } from "react-router-dom";
-import Title from "../../component/tittle/Title";
-import CustomButton from "../../component/Buttom/Buttom";
+import {Title }from "../../component/tittle/Title";
+import {Button} from "../../component/button/Button";
 import { ContainerInput, CustomForm, FormLogin } from "./Styled";
 
 export const Login = () => {
@@ -49,17 +49,17 @@ export const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-        <CustomButton
+        <Button
           mTop="2rem"
           type="submit"
           disabled={!validateForm()}
           onUserPress={handleSubmit}
         >
           login
-        </CustomButton>
-        <CustomButton mTop="1rem" bColor="grey" onUserPress={registerPage}>
+        </Button>
+        <Button mTop="1rem" bColor="grey" onUserPress={registerPage}>
           Registrar
-        </CustomButton>
+        </Button>
       </FormLogin>
     </ContainerInput>
   );

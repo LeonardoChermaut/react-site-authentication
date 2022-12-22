@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Button from "react-bootstrap/Button";
 
-export const PrimaryButton = styled(Button)`
+export const CustomButton = styled(Button)`
   height: ${(props) => props.heightsize || "50px"};
   width: ${(props) => props.widthsize || "100%"};
   align-self: ${(props) => props.aself || "center"};

@@ -1,5 +1,5 @@
 import React from "react";
-import CustomButton from "../Buttom/Buttom";
+import {Button} from "../button/Button";
 import { CDBBox, CDBFooter, CDBIcon } from "cdbreact";
 
 const styles = {
@@ -49,15 +49,15 @@ const Footer = () => (
         <small className="ml-2">&copy; Eagle, 2022. All rights reserved.</small>
       </CDBBox>
       <CDBBox>
-        <CustomButton mRight="1rem" width="50px" height="37px">
+        <Button mRight="1rem" width="50px" height="37px">
           <CDBIcon fab icon="facebook" />
-        </CustomButton>
-        <CustomButton mRight="1rem" width="50px" height="37px">
+        </Button>
+        <Button mRight="1rem" width="50px" height="37px">
           <CDBIcon fab icon="twitter" />
-        </CustomButton>
-        <CustomButton mRight="1rem" width="50px" height="37px">
+        </Button>
+        <Button mRight="1rem" width="50px" height="37px">
           <CDBIcon fab icon="instagram" />
-        </CustomButton>
+        </Button>
       </CDBBox>
     </CDBBox>
   </CDBFooter>
