@@ -1,22 +1,21 @@
 import { React, useState, useEffect } from "react";
-import { ImagesGalery, GaleryContainer } from "../../pages/Home/Styled";
-import {unsplashApi} from "./Api";
+import { GaleryContainer, ImagesGalery } from "../../pages/home/Styled";
+import { unsplashApi } from "./Api";
 
-export const GetImages = () => {
+export const GaleryImages = () => {
   const [images, setImages] = useState([]);
 
   useEffect(() => {
     (async () => {
-      const{ data: images } = await unsplashApi.get();
+      const { data: images } = await unsplashApi.get();
       setImages(images);
     })();
   }, []);
-
   return (
-    <GaleryContainer>
+    <GaleryContainer fluid>
       {images.map((img) => (
         <ImagesGalery key={img.id} src={img.urls.full} />
       ))}
     </GaleryContainer>
   );
-}
+};

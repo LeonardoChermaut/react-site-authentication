@@ -1,29 +1,31 @@
 import { createContext, useEffect, useState } from "react";
-import { LOCALHOST_API } from "../service/localhost-api/Api";
-import { AlertRequest } from "../component/Alert/AlertRequest";
+import { LOCALHOST } from "../service/localhost-api/Api";
+import { AlertRequest } from "../component/sweetalert/AlertRequest";
 
 export const UserContext = createContext();
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  
+
+  useEffect(() => {
+    const loadingStoreData = async () => {
+      const storageUser = localStorage.getItem("user");
+      const storageToken = localStorage.getItem("token");
+      if (storageUser && storageToken) {
+        setUser(storageUser);
+      }
+    };
+    loadingStoreData();
+  }, []);
+
   const addStorage = (token) => {
     localStorage.setItem("token", token);
     localStorage.setItem("user", JSON.stringify(token));
   };
-  
-  useEffect(() => {
-    (async function () {
-      const storageToken = localStorage.getItem("token");
-      const storageUser = localStorage.getItem("user");
-      storageToken && storageUser ? setUser(storageUser) : setUser(null);
-    })();
-  }, []);
 
   const signIn = async (user) => {
     try {
-      const { data: token } = await LOCALHOST_API.post("/login", user);
+      const { data: token } = await LOCALHOST.post("/login", user);
       addStorage(token);
-
     } catch (error) {
       console.error(`error on sign in `, error);
       AlertRequest({ title: `Ocorreu um erro`, icon: "error" });
@@ -39,8 +41,8 @@ export const UserProvider = ({ children }) => {
     <UserContext.Provider
       value={{
         user,
-        signed: !!user,
         signIn,
+        signed: !!user,
         signOut,
       }}
     >

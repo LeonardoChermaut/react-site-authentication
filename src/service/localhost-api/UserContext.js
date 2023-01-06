@@ -1,20 +1,16 @@
 import { useState, useEffect } from "react";
-import { LOCALHOST_API } from "./Api";
+import { LOCALHOST } from "./Api";
 
 export const UserContext = async () => {
   const [user, setUser] = useState([]);
-  
+
   useEffect(() => {
-    const token = localStorage.getItem("token");
     (async () => {
       try {
-        const {data: user} = await LOCALHOST_API.get(`/api/user/context`, {
-          Authorization: `Bearer ${token}`,
-        });
-     
+        const { data: user } = await LOCALHOST.get(`/api/user/context`);
         setUser(user);
       } catch (error) {
-        console.error('erro get user by context ', error);
+        console.error("erro get user by context ", error);
       }
     })();
   }, []);

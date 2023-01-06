@@ -3,7 +3,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { useNavigate } from "react-router-dom";
 import Title from "../../component/tittle/Title";
-import CustomButton from "../../component/Buttom/Buttom";
+import { Button } from "../../component/button/Button";
 import { RegisterUser } from "../../service/localhost-api/RegisterUser";
 import { ContainerInput, CustomForm, FormRegister } from "./Styled";
 
@@ -16,10 +16,14 @@ export const Register = () => {
 
   const returnLogin = () => navigate("/login");
 
-  const validateForm = () => name.length > 2 && lastName.length > 4 && email.length > 10 && password.length > 7;
+  const validateForm = () =>
+    name.length > 2 &&
+    lastName.length > 4 &&
+    email.length > 10 &&
+    password.length > 7;
 
   const handleSubmit = (event) => {
-    event.preventDefault(); 
+    event.preventDefault();
     const user = {
       nome: name,
       sobrenome: lastName,
@@ -70,17 +74,17 @@ export const Register = () => {
               />
             </Col>
           </Row>
-          <CustomButton
+          <Button
             mTop="1rem"
             type="submit"
             onUserPress={handleSubmit}
             disabled={!validateForm()}
           >
             Registrar
-          </CustomButton>
-          <CustomButton mTop="1rem" onUserPress={returnLogin} bColor="grey">
+          </Button>
+          <Button mTop="1rem" onUserPress={returnLogin} bColor="grey">
             Voltar
-          </CustomButton>
+          </Button>
         </FormRegister>
       </ContainerInput>
     </section>

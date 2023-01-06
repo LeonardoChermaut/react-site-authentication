@@ -1,7 +1,7 @@
 import React from "react";
-import { PrimaryButton } from "./Styled";
+import { CustomButton } from "./Styled";
 
-const CustomButton = ({
+export const Button = ({
   children,
   onUserPress,
   width,
@@ -18,7 +18,7 @@ const CustomButton = ({
   disabled,
   hover,
 }) => (
-  <PrimaryButton
+  <CustomButton
     hover={hover}
     aself={aSelf}
     text={tAlign}
@@ -35,7 +35,5 @@ const CustomButton = ({
     disabled={disabled}
   >
     {children}
-  </PrimaryButton>
+  </CustomButton>
 );
-
-export default CustomButton;

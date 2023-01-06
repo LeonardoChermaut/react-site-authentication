@@ -1,9 +1,9 @@
-import { LOCALHOST_API } from "./Api";
-import { AlertRequest } from "../../component/Alert/AlertRequest";
+import { LOCALHOST } from "./Api";
+import { AlertRequest } from "../../component/sweetalert/AlertRequest";
 
 export const RegisterUser = async (user) => {
   try {
-    const { data: status } = await LOCALHOST_API.post("/api/user", user);
+    const { data: status } = await LOCALHOST.post("/api/user", user);
     if (status === 200 || 202) {
       AlertRequest({
         title: "Cadastro com sucesso",

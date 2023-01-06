@@ -1,7 +1,7 @@
 import { React, useContext } from "react";
 import Title from "../tittle/Title";
 import UserProvider from "../../context";
-import CustomButton from "../Buttom/Buttom";
+import { Button } from "../button/Button";
 import { useNavigate } from "react-router-dom";
 import { NavbarStyled, Link, SignOutButtom } from "./Styled";
 
@@ -16,7 +16,7 @@ const Navbar = () => {
       <Link onClick={toHome}>Home</Link>
       <Link href="#">Sobre nós</Link>
       <SignOutButtom onClick={signOut}>Sair</SignOutButtom>
-      <CustomButton
+      <Button
         width="50px"
         height="60px"
         mLeft="1rem"
@@ -41,7 +41,7 @@ const Navbar = () => {
         <Title fSize="10px" fColor="#fff">
           Perfil
         </Title>
-      </CustomButton>
+      </Button>
     </NavbarStyled>
   );
 };

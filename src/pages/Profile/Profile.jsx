@@ -1,12 +1,12 @@
 import { React, useState } from "react";
 import { Row, Col, Container } from "react-bootstrap";
-import CustomButton from "../../component/Buttom/Buttom";
+import { Button } from "../../component/button/Button";
 import Navbar from "../../component/navbar/Navbar";
 import { UpdateUser } from "../../service/localhost-api/UpdateUser";
 import { UserContext } from "../../service/localhost-api/UserContext";
 
 export const Profile = () => {
-  const [id, setId] = useState(Number);
+  const [id, setId] = useState();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [lastName, setLastName] = useState("");
@@ -14,14 +14,20 @@ export const Profile = () => {
 
   const context = async (mappedUser) => {
     await mappedUser().then((user) => {
-      const { id, nome: name, email, sobrenome: lastName, senha: password } = user;
+      const {
+        id,
+        nome: name,
+        email,
+        sobrenome: lastName,
+        senha: password,
+      } = user;
       setId(id);
       setName(name);
       setEmail(email);
       setLastName(lastName);
       setPassword(password);
-    })
-  }
+    });
+  };
   context(UserContext);
 
   const update = (event) => {
@@ -47,6 +53,7 @@ export const Profile = () => {
                 className="rounded-circle mt-5"
                 width="150px"
                 src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
+                alt="peaple draw"
               />
               <span className="font-weight-bold">{name}</span>
               <span className="text-black-50">{email}</span>
@@ -57,7 +64,6 @@ export const Profile = () => {
               <div className="d-flex justify-content-between align-items-center mb-3">
                 <h4 className="text-right">Configuração do perfil</h4>
               </div>
-
               <Col className="col-md-12">
                 <label className="labels">Nome</label>
                 <input
@@ -89,17 +95,16 @@ export const Profile = () => {
                   type="password"
                   className="form-control"
                   placeholder="********"
-                  
                 />
               </Col>
-              <CustomButton
+              <Button
                 type="submit"
                 mTop="1.5rem"
                 height="2.7rem"
                 hover="darkgreen"
               >
                 Salvar
-              </CustomButton>
+              </Button>
             </div>
           </Col>
         </Row>

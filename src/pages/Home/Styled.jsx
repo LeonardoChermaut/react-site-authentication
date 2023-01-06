@@ -4,11 +4,13 @@ import Container from "react-bootstrap/Container";
 export const GaleryContainer = styled(Container)`
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 5rem;
 `;
 
 export const ImagesGalery = styled.img`
-  width: 25%;
-  flex: 1;
+  width: 20%;
+  height: 400px;
   margin: 1rem;
   border-radius: 0.8rem;
   transition: transform 0.2s;
@@ -18,6 +20,6 @@ export const ImagesGalery = styled.img`
   &:hover {
     ms-transform: scale(1.1); /* IE 9 */
     -webkit-transform: scale(1.1); /* Safari 3-8 */
-    transform: scale(1.08);
+    transform: scale(1.04);
   }
 `;
