@@ -1,7 +1,7 @@
 import React from "react";
 import { CustomTitle } from "./Styled";
 
-const Title = ({
+export const Title = ({
   children,
   mTop,
   mLeft,
@@ -24,4 +24,3 @@ const Title = ({
   </CustomTitle>
 );
 
-export default Title;

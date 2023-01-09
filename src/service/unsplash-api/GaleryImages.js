@@ -1,5 +1,6 @@
 import { React, useState, useEffect } from "react";
 import { GaleryContainer, ImagesGalery } from "../../pages/home/Styled";
+import { ImagesGalery, GaleryContainer } from "../../pages/home/Styled";
 import { unsplashApi } from "./Api";
 
 export const GaleryImages = () => {

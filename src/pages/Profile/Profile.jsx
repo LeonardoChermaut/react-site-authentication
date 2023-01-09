@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import { Row, Col, Container } from "react-bootstrap";
 import { Button } from "../../component/button/Button";
 import Navbar from "../../component/navbar/Navbar";
@@ -6,6 +6,7 @@ import { UpdateUser } from "../../service/localhost-api/UpdateUser";
 import { UserContext } from "../../service/localhost-api/UserContext";
 
 export const Profile = () => {
+  const [userDataContext, setUserDataContext] = useState([]);
   const [id, setId] = useState();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -29,6 +30,12 @@ export const Profile = () => {
     });
   };
   context(UserContext);
+  const convertContextToUser = async (context) => {
+    const data = await context();
+    setUserDataContext(data);
+  };
+
+  convertContextToUser(UserContext);
 
   const update = (event) => {
     event.preventDefault();
@@ -55,8 +62,8 @@ export const Profile = () => {
                 src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
                 alt="peaple draw"
               />
-              <span className="font-weight-bold">{name}</span>
-              <span className="text-black-50">{email}</span>
+              <span className="font-weight-bold">{userDataContext.nome}</span>
+              <span className="text-black-50">{userDataContext.email}</span>
             </Col>
           </Col>
           <Col className="col-md-5 border-right">
@@ -69,7 +76,8 @@ export const Profile = () => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder={name}
+                  placeholder={userDataContext.nome}
+                  onChange={(e) => setName(e.target.value)}
                 />
               </Col>
               <Col className="col-md-12">
@@ -77,7 +85,8 @@ export const Profile = () => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder={lastName}
+                  placeholder={userDataContext.sobrenome}
+                  onChange={(e) => setLastName(e.target.value)}
                 />
               </Col>
               <Col className="col-md-12">
@@ -85,16 +94,17 @@ export const Profile = () => {
                 <input
                   type="email"
                   className="form-control"
-                  placeholder={email}
+                  placeholder={userDataContext.email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </Col>
-
               <Col className="col-md-12">
                 <label className="labels">Senha</label>
                 <input
                   type="password"
                   className="form-control"
                   placeholder="********"
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </Col>
               <Button
@@ -102,6 +112,7 @@ export const Profile = () => {
                 mTop="1.5rem"
                 height="2.7rem"
                 hover="darkgreen"
+                onUserPress={() => update()}
               >
                 Salvar
               </Button>

@@ -3,6 +3,8 @@ import Container from "react-bootstrap/Container";
 import Navbar from "../../component/navbar/Navbar";
 import Title from "../../component/tittle/Title";
 import { GaleryImages } from "../../service/unsplash-api/GaleryImages";
+import { Title } from "../../component/tittle/Title";
+import { GetImages } from "../../service/unsplash-api/GetImages";
 
 export const Home = () => (
   <Fragment>
