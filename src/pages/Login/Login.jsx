@@ -2,8 +2,7 @@ import { React, useState, useContext } from "react";
 import Form from "react-bootstrap/Form";
 import Context from "../../context/context";
 import { useNavigate } from "react-router-dom";
-import { Button } from "../../component/button/Button";
-import { Title } from "../../component/tittle/Title";
+import { Title } from "../../component/title/Title";
 import { Button } from "../../component/button/Button";
 import { ContainerInput, CustomForm, FormLogin } from "./Styled";
 

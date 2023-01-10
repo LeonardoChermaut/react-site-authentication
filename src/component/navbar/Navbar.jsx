@@ -1,8 +1,5 @@
 import { React, useContext } from "react";
-import Title from "../tittle/Title";
-import UserProvider from "../../context";
-import { Button } from "../button/Button";
-import { Title } from "../tittle/Title";
+import { Title } from "../title/Title";
 import UserProvider from "../../context/context";
 import { Button } from "../button/Button";
 import { useNavigate } from "react-router-dom";

@@ -13,6 +13,7 @@ export const UserContext = async () => {
         console.error("erro get user by context ", error);
       }
     })();
-  }, [user]);
+  }, []);
+
   return user;
 };

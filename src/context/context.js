@@ -1,6 +1,5 @@
 import { createContext, useEffect, useState } from "react";
 import { LOCALHOST } from "../service/localhost-api/Api";
-import { LOCALHOST_API } from "../service/localhost-api/Api";
 import { AlertRequest } from "../component/sweetalert/AlertRequest";
 
 export const UserContext = createContext();
@@ -8,7 +7,7 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const loadingStoreData = async () => {
+    const loadingStoreData = () => {
       const storageUser = localStorage.getItem("user");
       const storageToken = localStorage.getItem("token");
       if (storageUser && storageToken) {

@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import { React, useState } from "react";
 import { Row, Col, Container } from "react-bootstrap";
 import { Button } from "../../component/button/Button";
 import Navbar from "../../component/navbar/Navbar";
