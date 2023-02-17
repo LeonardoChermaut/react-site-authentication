@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import { Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import {Title} from "../../component/tittle/Title";
-import {Button} from "../../component/button/Button";
-import { RegisterUser } from "../../service/localhost-api/RegisterUser";
+import { Title, Button } from "../../components/imports/index";
+import { registerUser } from "../../services/localhost/index";
 import { ContainerInput, CustomForm, FormRegister } from "./Styled";
 
 export const Register = () => {
@@ -16,17 +14,21 @@ export const Register = () => {
 
   const returnLogin = () => navigate("/login");
 
-  const validateForm = () => name.length > 2 && lastName.length > 4 && email.length > 10 && password.length > 7;
+  const validateForm = () =>
+    name.length > 2 &&
+    lastName.length > 4 &&
+    email.length > 10 &&
+    password.length > 7;
 
   const handleSubmit = (event) => {
-    event.preventDefault(); 
+    event.preventDefault();
     const user = {
       nome: name,
       sobrenome: lastName,
       email: email,
       senha: password,
     };
-    RegisterUser(user);
+    registerUser(user);
   };
 
   return (

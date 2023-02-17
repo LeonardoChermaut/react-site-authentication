@@ -1,13 +1,13 @@
-import { React, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { ImagesGalery, GaleryContainer } from "../../pages/home/Styled";
-import { unsplashApi } from "./Api";
+import { fetchImagesApi } from "./index";
 
 export const GetImages = () => {
   const [images, setImages] = useState([]);
 
   useEffect(() => {
     (async () => {
-      const { data: images } = await unsplashApi.get();
+      const { data: images } = await fetchImagesApi.get();
       setImages(images);
     })();
   }, []);

@@ -4,8 +4,8 @@ import { Home } from "./pages/home/Home";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Register } from "./pages/register/Register";
 import { Profile } from "./pages/profile/Profile";
-import { MemorizedFooter } from "./component/foorter/Footer";
-import { PrivateRoute } from "./router/PrivateRoute";
+import { MemorizedFooter } from "./components/foorter/Footer";
+import { PrivateRoute } from "./routers/PrivateRoute";
 
 export const App = () => {
   return (
@@ -14,14 +14,12 @@ export const App = () => {
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
         <Route index path="*" element={<Navigate to="/login" replace />} />
-        <Route
-          path="/home"
+        <Route path="/home" 
           element={
             <PrivateRoute>
               <Home />
             </PrivateRoute>
-          }
-        />
+          }/>
         <Route
           path="/profile"
           element={

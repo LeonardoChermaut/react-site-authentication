@@ -1,15 +1,14 @@
-import { React, useContext } from "react";
-import {Title }from "../tittle/Title";
-import UserProvider from "../../context/context";
-import {Button} from "../button/Button";
+import React, { useContext } from "react";
+import { Title, Button } from "../imports/index";
+import { UserContext } from "../../services/localhost/index";
 import { useNavigate } from "react-router-dom";
 import { NavbarStyled, Link, SignOutButtom } from "./Styled";
 
-const Navbar = () => {
+export const Navbar = () => {
   const navigate = useNavigate();
   const navigateToHome = () => navigate("/home");
   const navigateToProfile = () => navigate("/profile");
-  const { signOut } = useContext(UserProvider);
+  const { signOut } = useContext(UserContext);
 
   return (
     <NavbarStyled expand="lg" sticky="top">
@@ -45,5 +44,3 @@ const Navbar = () => {
     </NavbarStyled>
   );
 };
-
-export default Navbar;

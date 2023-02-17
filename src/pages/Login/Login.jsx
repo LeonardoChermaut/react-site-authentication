@@ -1,16 +1,15 @@
-import { React, useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import Form from "react-bootstrap/Form";
-import Context from "../../context/context";
 import { useNavigate } from "react-router-dom";
-import {Title }from "../../component/tittle/Title";
-import {Button} from "../../component/button/Button";
+import { UserContext } from "../../services/localhost/index";
+import { Title, Button } from "../../components/imports/index";
 import { ContainerInput, CustomForm, FormLogin } from "./Styled";
 
 export const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { signed, signIn } = useContext(Context);
+  const { signed, signIn } = useContext(UserContext);
 
   const validateForm = () => email.length > 0 && password.length > 0;
   const registerPage = () => navigate("/register");
@@ -23,7 +22,7 @@ export const Login = () => {
       navigate("/home");
     }
   };
-  
+
   return (
     <ContainerInput>
       <Title fSize="30px" tAlign="center" mBottom="2rem" mTop="1rem">

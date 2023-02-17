@@ -1,7 +1,6 @@
 import React from "react";
-import Navbar from "../../component/navbar/Navbar";
-import {Title} from "../../component/tittle/Title";
-import {GetImages} from "../../service/unsplash-api/GetImages";
+import { Navbar, Title } from "../../components/imports/index";
+import { GetImages } from "../../services/unsplash/index";
 
 export const Home = () => (
   <>
@@ -14,4 +13,3 @@ export const Home = () => (
     </section>
   </>
 );
-

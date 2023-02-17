@@ -1,47 +1,34 @@
 import { React, useEffect, useState } from "react";
 import { Row, Col, Container } from "react-bootstrap";
-import { Button } from "../../component/button/Button";
-import Navbar from "../../component/navbar/Navbar";
-import { UpdateUser } from "../../service/localhost-api/UpdateUser";
-import { UserContext } from "../../service/localhost-api/UserContext";
+import { Button, Navbar } from "../../components/imports/index";
+import { updateUser, UserContext } from "../../services/localhost/index";
 
 export const Profile = () => {
-  const [userDataContext, setUserDataContext] = useState([]);
+  const [userDataContext, setUserDataContext] = useState();
   const [id, setId] = useState();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
 
-  const convertContextToUser = async (context) => {
-    const data =  await context();
-    setUserDataContext(data);
-  };
-
-  convertContextToUser(UserContext);
-
-  //   Verify highorder map / this option 
-
-  // useEffect(() => {
-  //  (async () => {
-  //   const mappedUser = userDataContext.map((user) => {
-  //     const {
-  //       id,
-  //       nome: name,
-  //       email,
-  //       sobrenome: lastName,
-  //       senha: password,
-  //     } =  user;
-  //     setId(id);
-  //     setName(name);
-  //     setEmail(email);
-  //     setLastName(lastName);
-  //     setPassword(password);
-      
-  //   });
-  //  })();
-  // }, []);
-
+  useEffect(() => {
+    const contextToUser = async (context) => {
+      const data = await context();
+      const response = await data;
+      try {
+        if (response) {
+          setUserDataContext(response);
+          const mappedUser = userDataContext.map((user) => {
+            console.log(user);
+          });
+          return mappedUser;
+        }
+      } catch (error) {
+        console.error("error convert", error.message);
+      }
+    };
+    contextToUser(UserContext);
+  }, []);
 
   const update = (event) => {
     event.preventDefault();
@@ -52,7 +39,7 @@ export const Profile = () => {
       sobrenome: lastName,
       senha: password,
     };
-    UpdateUser(request);
+    updateUser(request);
   };
 
   return (
