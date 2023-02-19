@@ -11,9 +11,8 @@ export const GetImages = () => {
       setImages(images);
     })();
   }, []);
-
   return (
-    <GaleryContainer>
+    <GaleryContainer fluid>
       {images.map((img) => (
         <ImagesGalery key={img.id} src={img.urls.full} />
       ))}
