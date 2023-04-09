@@ -11,15 +11,22 @@ export const Login = () => {
   const [password, setPassword] = useState("");
   const { signed, signIn } = useContext(UserContext);
 
-  const validateForm = () => email.length > 0 && password.length > 0;
-  const registerPage = () => navigate("/register");
+  const validadeEmailAndPasswordForm = () => email.length > 0 && password.length > 0;
+  const navigateToPage = (page) => navigate(page);
 
-  const handleSubmit = (e) => {
+  const handleSubmitLoginForm = (e) => {
     e.preventDefault();
     const user = { email: email, senha: password };
-    signIn(user);
-    if (signed) {
-      navigate("/home");
+    verifyDataUserOrElseThrow(user);
+  };
+
+  const verifyDataUserOrElseThrow = (data) => {
+    if (data.email && data.senha) signIn(data);
+    try {
+      if (signed) navigateToPage("/home");
+      return;
+    } catch (error) {
+      console.error(error.message());
     }
   };
 
@@ -28,7 +35,7 @@ export const Login = () => {
       <Title fSize="30px" tAlign="center" mBottom="2rem" mTop="1rem">
         Faça seu login
       </Title>
-      <FormLogin onSubmit={handleSubmit}>
+      <FormLogin onSubmit={handleSubmitLoginForm}>
         <Form.Group size="lg" controlId="email">
           <Form.Label>Email</Form.Label>
           <CustomForm
@@ -51,12 +58,12 @@ export const Login = () => {
         <Button
           mTop="2rem"
           type="submit"
-          disabled={!validateForm()}
-          onUserPress={handleSubmit}
+          disabled={!validadeEmailAndPasswordForm()}
+          onUserPress={() => handleSubmitLoginForm}
         >
           login
         </Button>
-        <Button mTop="1rem" bColor="grey" onUserPress={registerPage}>
+        <Button mTop="1rem" bColor="grey" onUserPress={() => navigateToPage("/register")}>
           Registrar
         </Button>
       </FormLogin>

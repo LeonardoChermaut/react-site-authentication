@@ -9,7 +9,7 @@ const loadUserFromStorage = () => {
   if (storageUser) {
     return JSON.parse(storageUser);
   }
-  return null;
+  return undefined;
 };
 
 const saveUserToStorage = (token, user) => {
@@ -31,7 +31,7 @@ const loadUserDataFromServer = async (setUser) => {
     return data;
   } catch (error) {
     console.error("Failed to fetch user by context", error);
-    return null;
+    return undefined;
   }
 };
 
@@ -59,18 +59,13 @@ export const UserProvider = ({ children }) => {
   };
 
   const isSignedIn = !!user;
+  const value = {
+    user,
+    userDataContext: () => loadUserDataFromServer(setUser),
+    signIn,
+    signed: isSignedIn,
+    signOut,
+  };
 
-  return (
-    <UserContext.Provider
-      value={{
-        user,
-        userDataContext: () => loadUserDataFromServer(setUser),
-        signIn,
-        signed: isSignedIn,
-        signOut,
-      }}
-    >
-      {children}
-    </UserContext.Provider>
-  );
+  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
