@@ -1,33 +1,37 @@
-import { React, useContext, useState } from "react";
+import { React, useContext, useEffect, useState } from "react";
 import { Row, Col, Container } from "react-bootstrap";
 import { Button, Navbar } from "../../components/imports/index";
 import { updateUser } from "../../services/localhost/index";
 import { UserContext } from "../../services/localhost/index";
 
-export const Profile = async () => {
-  const { user, setUser } = useContext(UserContext);
+export const Profile = () => {
+  const { user } = useContext(UserContext);
 
-  const USER_PROFILE = {
-    id: user.id,
-    name: user.nome,
-    email: user.email,
-    lastName: user.sobrenome,
-    password: user.senha,
-  };
+  const [profile, setProfile] = useState({});
 
-  const [profile, setProfile] = useState(USER_PROFILE);
-
-  const handleInputToUpdate = async () => {
-    const updatedUser = await updateUser(profile);
-    if (updatedUser) {
-      setUser(updatedUser);
+  const verifyUserObjectContext = (user) => {
+    if (user) {
+       const USER_PROFILE = {
+        id: user.id,
+        name: user.nome,
+        email: user.email,
+        lastName: user.sobrenome,
+        password: user.senha,
+      };
+      setProfile(USER_PROFILE);
     }
   };
+
+  const handleInputToUpdate = async () => await updateUser(profile);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setProfile({ ...profile, [name]: value });
   };
+
+  useEffect(() => {
+    verifyUserObjectContext(user);
+  }, [user]);
 
   return (
     <>
@@ -42,10 +46,8 @@ export const Profile = async () => {
                 alt="draw peaple"
                 src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
               />
-              <span className="font-weight-bold">
-                {user?.nome || "Loading..."}
-              </span>
-              <span className="text-black-50">{user?.email}</span>
+              <span className="font-weight-bold">{profile.name}</span>
+              <span className="text-black-50">{profile.email}</span>
             </Col>
           </Col>
           <Col className="col-md-5 border-right">
@@ -58,7 +60,7 @@ export const Profile = async () => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder={user?.nome}
+                  placeholder={profile.name}
                   onChange={(e) => handleInputChange(e)}
                 />
               </Col>
@@ -67,7 +69,7 @@ export const Profile = async () => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder={user?.sobrenome}
+                  placeholder={profile.lastName}
                   onChange={(e) => handleInputChange(e)}
                 />
               </Col>
@@ -76,7 +78,7 @@ export const Profile = async () => {
                 <input
                   type="email"
                   className="form-control"
-                  placeholder={user?.email}
+                  placeholder={profile.email}
                   onChange={(e) => handleInputChange(e)}
                 />
               </Col>
