@@ -5,7 +5,7 @@ import { GetImages } from "../../services/unsplash/index";
 
 export const Home = () => (
   <Fragment>
-    <Navbar />z
+    <Navbar />
     <Container fluid>
       <section>
         <Title tAlign="center" fSize="2rem" mBottom="2rem" mTop="5rem">

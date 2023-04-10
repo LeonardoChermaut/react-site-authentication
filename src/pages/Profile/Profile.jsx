@@ -4,27 +4,29 @@ import { Button, Navbar } from "../../components/imports/index";
 import { updateUser } from "../../services/localhost/index";
 import { UserContext } from "../../services/localhost/index";
 
-export const Profile = () => {
+export const Profile = async () => {
   const { user, setUser } = useContext(UserContext);
-  const [name, setName] = useState(user?.nome || "");
-  const [email, setEmail] = useState(user?.email || "");
-  const [lastName, setLastName] = useState(user?.sobrenome || "");
-  const [password, setPassword] = useState(user?.senha || "");
 
-  const handleUpdateButtonClick = async () => {
-    const request = {
-      id: user.id,
-      nome: name,
-      email: email,
-      sobrenome: lastName,
-      senha: password,
-    };
-    try {
-      const { data } = await updateUser(request);
-      setUser(data);
-    } catch (error) {
-      console.error(`error on update user `, error);
+  const USER_PROFILE = {
+    id: user.id,
+    name: user.nome,
+    email: user.email,
+    lastName: user.sobrenome,
+    password: user.senha,
+  };
+
+  const [profile, setProfile] = useState(USER_PROFILE);
+
+  const handleInputToUpdate = async () => {
+    const updatedUser = await updateUser(profile);
+    if (updatedUser) {
+      setUser(updatedUser);
     }
+  };
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setProfile({ ...profile, [name]: value });
   };
 
   return (
@@ -57,7 +59,7 @@ export const Profile = () => {
                   type="text"
                   className="form-control"
                   placeholder={user?.nome}
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={(e) => handleInputChange(e)}
                 />
               </Col>
               <Col className="col-md-12">
@@ -66,7 +68,7 @@ export const Profile = () => {
                   type="text"
                   className="form-control"
                   placeholder={user?.sobrenome}
-                  onChange={(e) => setLastName(e.target.value)}
+                  onChange={(e) => handleInputChange(e)}
                 />
               </Col>
               <Col className="col-md-12">
@@ -75,7 +77,7 @@ export const Profile = () => {
                   type="email"
                   className="form-control"
                   placeholder={user?.email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => handleInputChange(e)}
                 />
               </Col>
               <Col className="col-md-12">
@@ -84,7 +86,7 @@ export const Profile = () => {
                   type="password"
                   className="form-control"
                   placeholder="******"
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => handleInputChange(e)}
                 />
               </Col>
               <Button
@@ -92,7 +94,7 @@ export const Profile = () => {
                 mTop="1.5rem"
                 height="2.7rem"
                 hover="darkgreen"
-                onUserPress={handleUpdateButtonClick}
+                onUserPress={handleInputToUpdate}
               >
                 Salvar
               </Button>

@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
-import { fetchLocalApi, token } from "./index";
+import { fetchLocalApi } from "./index";
 import { AlertRequest } from "../../components/sweetalert/AlertRequest";
+import { header } from "./token";
 
 export const UserContext = createContext();
 
@@ -24,13 +25,12 @@ const clearUserFromStorage = () => {
 
 const loadUserDataFromServer = async (setUser) => {
   try {
-    const { data } = await fetchLocalApi.get("/api/user/context", {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    setUser(data);
-    return data;
+    const { data: user } = await fetchLocalApi.get("/api/user/context", header);
+    console.log(user);
+    setUser(user);
+    return user;
   } catch (error) {
-    console.error("Failed to fetch user by context", error);
+    console.error("Error:", error.message);
     return undefined;
   }
 };
@@ -38,17 +38,13 @@ const loadUserDataFromServer = async (setUser) => {
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(loadUserFromStorage());
 
-  useEffect(() => {
-    loadUserDataFromServer(setUser);
-  }, []);
-
-  const signIn = async (userData) => {
+  const signIn = async (user) => {
     try {
-      const { data: token } = await fetchLocalApi.post("/login", userData);
-      saveUserToStorage(token, userData);
-      setUser(userData);
+      const { data: token } = await fetchLocalApi.post("/login", user);
+      saveUserToStorage(token, user);
+      setUser(user);
     } catch (error) {
-      console.error("Error on sign in", error);
+      console.error("Error on sign in", error.message);
       AlertRequest({ title: "Ocorreu um erro", icon: "error" });
     }
   };
@@ -59,6 +55,7 @@ export const UserProvider = ({ children }) => {
   };
 
   const isSignedIn = !!user;
+
   const value = {
     user,
     userDataContext: () => loadUserDataFromServer(setUser),
@@ -66,6 +63,10 @@ export const UserProvider = ({ children }) => {
     signed: isSignedIn,
     signOut,
   };
+
+  useEffect(() => {
+    (async () => loadUserDataFromServer(setUser))();
+  }, []);
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
