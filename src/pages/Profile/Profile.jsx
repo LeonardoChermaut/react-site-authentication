@@ -6,23 +6,32 @@ import { UserContext } from "../../services/localhost/index";
 
 export const Profile = () => {
   const { user } = useContext(UserContext);
-
   const [profile, setProfile] = useState({});
 
   const verifyUserObjectContext = (user) => {
     if (user) {
        const USER_PROFILE = {
         id: user.id,
-        name: user.nome,
+        nome: user.nome,
         email: user.email,
-        lastName: user.sobrenome,
+        sobrenome: user.sobrenome,
         password: user.senha,
       };
       setProfile(USER_PROFILE);
     }
   };
 
-  const handleInputToUpdate = async () => await updateUser(profile);
+  const handleInputToUpdate = async () => {
+    const updatedProfile = {
+      id: profile.id,
+      nome: profile.nome !== "" ? profile.nome : user.nome,
+      email: profile.email !== "" ? profile.email : user.email,
+      sobrenome: profile.sobrenome !== "" ? profile.sobrenome : user.sobrenome,
+      password: profile.password !== "" ? profile.password : user.senha,
+    };
+    await updateUser(updatedProfile);
+  };
+  
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -46,7 +55,7 @@ export const Profile = () => {
                 alt="draw peaple"
                 src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
               />
-              <span className="font-weight-bold">{profile.name}</span>
+              <span className="font-weight-bold">{profile.nome}</span>
               <span className="text-black-50">{profile.email}</span>
             </Col>
           </Col>
@@ -60,7 +69,7 @@ export const Profile = () => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder={profile.name}
+                  placeholder={profile.nome}
                   onChange={(e) => handleInputChange(e)}
                 />
               </Col>
@@ -69,7 +78,7 @@ export const Profile = () => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder={profile.lastName}
+                  placeholder={profile.sobrenome}
                   onChange={(e) => handleInputChange(e)}
                 />
               </Col>

@@ -26,7 +26,6 @@ const clearUserFromStorage = () => {
 const loadUserDataFromServer = async (setUser) => {
   try {
     const { data: user } = await fetchLocalApi.get("/api/user/context", header);
-    console.log(user);
     setUser(user);
     return user;
   } catch (error) {
