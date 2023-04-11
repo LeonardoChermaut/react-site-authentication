@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { Title, Button } from "../../components/imports/index";
+import { Title, Button } from "../../components/index";
 import { registerUser } from "../../services/localhost/index";
 import { ContainerInput, CustomForm, FormRegister } from "./Styled";
 

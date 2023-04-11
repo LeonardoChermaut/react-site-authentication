@@ -1,6 +1,6 @@
 import { React, useContext, useEffect, useState } from "react";
 import { Row, Col, Container } from "react-bootstrap";
-import { Button, Navbar } from "../../components/imports/index";
+import { Button, Navbar } from "../../components/index";
 import { updateUser } from "../../services/localhost/index";
 import { UserContext } from "../../services/localhost/index";
 

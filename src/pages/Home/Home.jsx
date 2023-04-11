@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { Container } from "react-bootstrap";
-import { Navbar, Title } from "../../components/imports/index";
+import { Navbar, Title } from "../../components/index";
 import { GetImages } from "../../services/unsplash/index";
 
 export const Home = () => (

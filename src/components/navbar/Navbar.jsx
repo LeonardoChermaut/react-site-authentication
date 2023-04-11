@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Title, Button } from "../imports/index";
+import { Title, Button } from "../index";
 import { UserContext } from "../../services/localhost/index";
 import { useNavigate } from "react-router-dom";
 import { NavbarStyled, Link, SignOutButtom } from "./Styled";

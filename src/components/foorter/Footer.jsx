@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "../imports/index";
+import { Button } from "../index";
 import { CDBBox, CDBFooter, CDBIcon } from "cdbreact";
 
 const styles = {

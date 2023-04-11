@@ -1,7 +1,7 @@
 import { Fragment, React } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Register, Profile, Home, Login } from "./pages/index";
-import { MemorizedFooter } from "./components/imports/index";
+import { MemorizedFooter } from "./components/index";
 import { PrivateRoute } from "./routers/PrivateRoute";
 
 export const App = () => {

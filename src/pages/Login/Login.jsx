@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../services/localhost/index";
-import { Title, Button } from "../../components/imports/index";
+import { Title, Button } from "../../components/index";
 import { ContainerInput, CustomForm, FormLogin } from "./Styled";
 
 export const Login = () => {
