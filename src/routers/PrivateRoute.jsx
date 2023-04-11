@@ -5,8 +5,7 @@ import { UserContext } from "../services/localhost/index";
 export const PrivateRoute = ({ children }) => {
   const { signed } = useContext(UserContext);
 
-  if (!signed) {
-    return <Navigate to="/login" replace />;
-  }
+  if (!signed) return <Navigate to="/login" replace />;
+  
   return children;
 };

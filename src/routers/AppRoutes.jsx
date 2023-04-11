@@ -1,15 +1,17 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
-import { Login, Home, Register } from "../pages/index";
-import { UserPerfil } from "../pages/Perfil/Profile";
+import { Navigate, Route, Routes } from "react-router-dom";
+import { Login, Home, Register, Profile } from "../pages/index";
+import { PrivateRoute } from "./PrivateRoute";
 
 export const AppRoutes = () => {
   return (
     <Routes>
-      <Route element={<Home />} path="/home" />
-      <Route element={<Login />} exact path="/" />
-      <Route element={<Register />} exact path="/register" />
-      <Route element={<UserPerfil />} exact path="/profile" />
-    </Routes>
+    <Route exact path="/login" element={<Login />} />
+    <Route exact path="/register" element={<Register />} />
+    <Route index path="*" element={<Navigate to="/login" replace />} />
+
+    <Route path="/home" element={ <PrivateRoute><Home /></PrivateRoute> }/>
+    <Route path="/profile" element={ <PrivateRoute><Profile /></PrivateRoute> }/>
+  </Routes>
   );
 };
