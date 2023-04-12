@@ -26,7 +26,7 @@ export const Login = () => {
       if (signed) navigateToPage("/home");
       return;
     } catch (error) {
-      console.error(error.message());
+      throw new Error(error);
     }
   };
 

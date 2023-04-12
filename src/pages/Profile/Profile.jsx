@@ -10,14 +10,14 @@ export const Profile = () => {
 
   const verifyUserObjectContext = (user) => {
     if (user) {
-       const USER_PROFILE = {
+       const data = {
         id: user.id,
         nome: user.nome,
         email: user.email,
         sobrenome: user.sobrenome,
         password: user.senha,
       };
-      setProfile(USER_PROFILE);
+      setProfile(data);
     }
   };
 

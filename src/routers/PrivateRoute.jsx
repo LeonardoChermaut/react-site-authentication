@@ -6,6 +6,5 @@ export const PrivateRoute = ({ children }) => {
   const { signed } = useContext(UserContext);
 
   if (!signed) return <Navigate to="/login" replace />;
-  
   return children;
 };

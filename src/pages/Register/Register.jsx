@@ -5,30 +5,34 @@ import { Title, Button } from "../../components/index";
 import { registerUser } from "../../services/localhost/index";
 import { ContainerInput, CustomForm, FormRegister } from "./Styled";
 
+let USER_REGISTER_SCHEMA = {
+  name: "",
+  lastName: "",
+  email: "",
+  password: ""
+}
+
 export const Register = () => {
   const navigate = useNavigate();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [lastName, setLastName] = useState("");
-
+  const [user, setUser] = useState(USER_REGISTER_SCHEMA);
+  
   const returnLogin = () => navigate("/login");
 
   const validateForm = () =>
-    name.length > 2 &&
-    lastName.length > 4 &&
-    email.length > 10 &&
-    password.length > 7;
+    user.name.length >= 3 &&
+    user.lastName.length >= 4 &&
+    user.email.length >= 15 &&
+    user.password.length >= 8;
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const user = {
-      nome: name,
-      sobrenome: lastName,
-      email: email,
-      senha: password,
+    USER_REGISTER_SCHEMA = {
+      name: user.name,
+      lastName: user.lastName,
+      email: user.email,
+      senha: user.password,
     };
-    registerUser(user);
+    registerUser(USER_REGISTER_SCHEMA);
   };
 
   return (
@@ -46,29 +50,29 @@ export const Register = () => {
               <CustomForm
                 placeholder="Nome"
                 autoComplete="on"
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => setUser({...user, name: e.target.value})}
               />
 
               <CustomForm
                 placeholder="Sobrenome"
                 autoComplete="on"
-                onChange={(e) => setLastName(e.target.value)}
+                onChange={(e) => setUser({...user, lastName: e.target.value})}
               />
 
               <CustomForm
                 autoFocus
                 type="email"
-                value={email}
+                value={user.email}
                 autoComplete="on"
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setUser({...user, email: e.target.value})}
                 placeholder="Email"
               />
               <CustomForm
                 placeholder="Senha"
                 type="password"
-                value={password}
+                value={user.password}
                 autoComplete="on"
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => setUser({...user, password: e.target.value})}
               />
             </Col>
           </Row>
