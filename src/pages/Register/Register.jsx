@@ -5,7 +5,7 @@ import { Title, Button } from "../../components/index";
 import { registerUser } from "../../services/localhost/index";
 import { ContainerInput, CustomForm, FormRegister } from "./Styled";
 
-let USER_REGISTER_SCHEMA = {
+const USER_REGISTER_SCHEMA = {
   name: "",
   lastName: "",
   email: "",
@@ -26,13 +26,14 @@ export const Register = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    USER_REGISTER_SCHEMA = {
+    const newUser = {
+      ...USER_REGISTER_SCHEMA,
       name: user.name,
       lastName: user.lastName,
       email: user.email,
       senha: user.password,
     };
-    registerUser(USER_REGISTER_SCHEMA);
+    registerUser(newUser);
   };
 
   return (

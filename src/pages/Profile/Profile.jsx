@@ -4,34 +4,43 @@ import { Button, Navbar } from "../../components/index";
 import { updateUser } from "../../services/localhost/index";
 import { UserContext } from "../../services/localhost/index";
 
+const PROFILE_SCHEMA = {
+  id: "",
+  nome: "",
+  email: "",
+  sobrenome: "",
+  password: "",
+};
+
 export const Profile = () => {
   const { user } = useContext(UserContext);
-  const [profile, setProfile] = useState({});
+  const [profile, setProfile] = useState(PROFILE_SCHEMA);
 
   const verifyUserObjectContext = (user) => {
     if (user) {
-       const data = {
+      const profile = {
+        ...PROFILE_SCHEMA,
         id: user.id,
         nome: user.nome,
         email: user.email,
         sobrenome: user.sobrenome,
         password: user.senha,
       };
-      setProfile(data);
+      setProfile(profile);
     }
   };
 
-  const handleInputToUpdate = async () => {
-    const updatedProfile = {
+  const handleInputToUpdateProfile = async () => {
+    const updatedUserProfile = {
+      ...PROFILE_SCHEMA,
       id: profile.id,
       nome: profile.nome !== "" ? profile.nome : user.nome,
       email: profile.email !== "" ? profile.email : user.email,
       sobrenome: profile.sobrenome !== "" ? profile.sobrenome : user.sobrenome,
       password: profile.password !== "" ? profile.password : user.senha,
     };
-    await updateUser(updatedProfile);
+    await updateUser(updatedUserProfile);
   };
-  
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -105,7 +114,7 @@ export const Profile = () => {
                 mTop="1.5rem"
                 height="2.7rem"
                 hover="darkgreen"
-                onUserPress={handleInputToUpdate}
+                onUserPress={handleInputToUpdateProfile}
               >
                 Salvar
               </Button>
