@@ -5,28 +5,28 @@ import { UserContext } from "../../services/localhost/index";
 import { Title, Button } from "../../components/index";
 import { ContainerInput, CustomForm, FormLogin } from "./Styled";
 
+const FORM_SCHEMA = {
+  email: "",
+  password: "",
+};
+
 export const Login = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [login, setLogin] = useState(FORM_SCHEMA);
   const { signed, signIn } = useContext(UserContext);
 
-  const validadeEmailAndPasswordForm = () => email.length > 0 && password.length > 0;
-  const navigateToPage = (page) => navigate(page);
+  const isValidEmailAndPassword = () => login.email.length > 0 && login.password.length > 0;
+  const navigateTo = (page) => navigate(page);
 
-  const handleSubmitLoginForm = (e) => {
+  const handleSubmitFormLogin = (e) => {
     e.preventDefault();
-    const user = { email: email, senha: password };
-    verifyDataUserOrElseThrow(user);
-  };
-
-  const verifyDataUserOrElseThrow = (data) => {
-    if (data.email && data.senha) signIn(data);
-    try {
-      if (signed) navigateToPage("/home");
-      return;
-    } catch (error) {
-      throw new Error(error);
+    if (isValidEmailAndPassword()) {
+      signIn(login);
+      try {
+        if (signed) navigateTo("/home");
+      } catch (error) {
+        throw new Error(error);
+      }
     }
   };
 
@@ -35,14 +35,14 @@ export const Login = () => {
       <Title fSize="30px" tAlign="center" mBottom="2rem" mTop="1rem">
         Faça seu login
       </Title>
-      <FormLogin onSubmit={handleSubmitLoginForm}>
+      <FormLogin onSubmit={handleSubmitFormLogin}>
         <Form.Group size="lg" controlId="email">
           <Form.Label>Email</Form.Label>
           <CustomForm
             autoFocus
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={login.email}
+            onChange={(e) => setLogin({ ...login, email: e.target.value })}
           />
         </Form.Group>
         <Form.Group size="lg" controlId="password">
@@ -50,20 +50,24 @@ export const Login = () => {
           <Form.Control
             autoFocus
             type="password"
-            value={password}
+            value={login.password}
             autoComplete="on"
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => setLogin({ ...login, password: e.target.value })}
           />
         </Form.Group>
         <Button
           mTop="2rem"
           type="submit"
-          disabled={!validadeEmailAndPasswordForm()}
-          onUserPress={() => handleSubmitLoginForm}
+          disabled={!isValidEmailAndPassword()}
+          onUserPress={() => handleSubmitFormLogin}
         >
           login
         </Button>
-        <Button mTop="1rem" bColor="grey" onUserPress={() => navigateToPage("/register")}>
+        <Button
+          mTop="1rem"
+          bColor="grey"
+          onUserPress={() => navigateTo("/register")}
+        >
           Registrar
         </Button>
       </FormLogin>

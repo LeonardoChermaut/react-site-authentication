@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { fetchLocalApi } from "./index";
 import { AlertRequest } from "../../components/sweetalert/AlertRequest";
-import { header } from "./token";
+import { headers } from "./token";
 
 export const UserContext = createContext();
 
@@ -25,7 +25,7 @@ const clearUserFromStorage = () => {
 
 const loadUserDataFromServer = async (setUser) => {
   try {
-    const { data: user } = await fetchLocalApi.get("/api/user/context", header);
+    const { data: user } = await fetchLocalApi.get("/api/user/context", headers);
     setUser(user);
     return user;
   } catch (error) {

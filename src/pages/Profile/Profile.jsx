@@ -20,7 +20,7 @@ export const Profile = () => {
     if (user) {
       const profile = {
         ...PROFILE_SCHEMA,
-        id: user.id,
+        id: parseInt(user.id),
         nome: user.nome,
         email: user.email,
         sobrenome: user.sobrenome,

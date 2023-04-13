@@ -1,11 +1,12 @@
 import { fetchLocalApi } from "./index";
 import { AlertRequest } from "../../components/sweetalert/AlertRequest";
-import { header } from "./token";
+import { headers } from "./token";
 
 export const updateUser = async (user) => {
+  const route = `/api/user/${user.id}`
   try {
-    const { status } = await fetchLocalApi.put(`/api/user/${user.id}`, user, header);
-    if (status === 200 || 202) {
+    const { status } = await fetchLocalApi.put(route, user, headers);
+    if (status === 200) {
       AlertRequest({
         title: "Atualização com sucesso",
         icon: "success",
