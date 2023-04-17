@@ -1,10 +1,6 @@
 import Swal from "sweetalert2";
+import { SWAL_FIRE_SCHEMA } from "../../utils";
 
-export const AlertRequest = ({ title, icon }) => {
-  Swal.fire({
-    position: "center",
-    icon: `${icon}`,
-    title: `${title}`,
-    showConfirmButton: true,
-  });
+export const AlertRequest = ({ icon, title}) => {
+  Swal.fire(SWAL_FIRE_SCHEMA(icon, title));
 };
