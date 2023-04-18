@@ -1,1 +1,1 @@
-export { alertRequest } from "./alertRequest";
+export { AlertRequest } from "./AlertRequest";

@@ -1,5 +1,5 @@
-export { Navbar } from "./navbar/Navbar";
-export { Button } from "./button/Button";
-export { Title } from "./tittle/Title";
-export { MemorizedFooter } from "./foorter/Footer";
-export { alertRequest } from "./sweetalert/alertRequest";
+export { Navbar } from "./navbar/index";
+export { Button } from "./button/index";
+export { Title } from "./title/index";
+export { MemorizedFooter } from "./footer/index";
+export { AlertRequest } from "./sweetalert/index";

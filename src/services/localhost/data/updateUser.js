@@ -1,5 +1,5 @@
 import { localhost } from "./index";
-import { alertRequest } from "../../../components/sweetalert/index";
+import { AlertRequest } from "../../../components/sweetalert/AlertRequest"
 import { headers } from "../token/index";
 import {
   ACCEPTED_STATUS_CODE,
@@ -16,14 +16,14 @@ export const updateUser = async (user) => {
       headers
     );
     if (status === ACCEPTED_STATUS_CODE) {
-      alertRequest({
+      AlertRequest({
         title: SUCCESS_UPDATE_MESSAGE.title,
         icon: SUCCESS_UPDATE_MESSAGE.icon,
       });
     }
   } catch (error) {
     console.error(error.message);
-    alertRequest({
+    AlertRequest({
       title: ERROR_UPDATE_MESSAGE.title,
       icon: ERROR_UPDATE_MESSAGE.icon,
     });

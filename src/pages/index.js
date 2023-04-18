@@ -1,4 +1,4 @@
-export { Home } from "./home/Home";
-export { Login } from "./login/Login";
-export { Profile } from "./profile/Profile";
-export { Register } from "./register/Register";
+export { Home } from "./home/index";
+export { Login } from "./login/index";
+export { Profile } from "./profile/index";
+export { Register } from "./register/index";

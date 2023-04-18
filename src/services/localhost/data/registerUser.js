@@ -1,5 +1,5 @@
 import { localhost } from "./index";
-import { alertRequest } from "../../../components/sweetalert/alertRequest";
+import { AlertRequest } from "../../../components/sweetalert/AlertRequest";
 import {
   ACCEPTED_STATUS_CODE,
   SUCCESS_REGISTER_MESSAGE,
@@ -11,14 +11,14 @@ export const registerUser = async (user) => {
   try {
     const { data: status } = await localhost.post(path, user);
     if (status === ACCEPTED_STATUS_CODE) {
-      alertRequest({
+      AlertRequest({
         title: SUCCESS_REGISTER_MESSAGE.title,
         icon: SUCCESS_REGISTER_MESSAGE.icon,
       });
     }
   } catch (e) {
     console.error(e.data);
-    alertRequest({
+    AlertRequest({
       title: ERROR_REGISTER_MESSAGE.title,
       icon: ERROR_REGISTER_MESSAGE.icon,
     });

@@ -3,7 +3,7 @@ import { localhost } from "./index";
 import { headers } from "../token/index";
 import { ERROR_LOGIN_MESSAGE } from "../utils/index";
 import { PATH_USER_CONTEXT, PATH_USER_LOGIN } from "../utils/utils";
-import { alertRequest } from "../../../components/sweetalert/alertRequest";
+import { AlertRequest } from "../../../components/sweetalert/AlertRequest";
 
 export const UserContext = createContext();
 
@@ -46,7 +46,7 @@ export const UserProvider = ({ children }) => {
       setUser(user);
     } catch (error) {
       console.error(error.message);
-      alertRequest({
+      AlertRequest({
         title: ERROR_LOGIN_MESSAGE.message,
         icon: ERROR_LOGIN_MESSAGE.icon,
       });
