@@ -1,7 +1,9 @@
-import { createContext, useEffect, useState } from "react";
-import { fetchLocalApi } from "./index";
-import { AlertRequest } from "../../components/sweetalert/AlertRequest";
-import { headers } from "./token";
+import React, { createContext, useEffect, useState } from "react";
+import { localhost } from "./index";
+import { headers } from "../token/index";
+import { ERROR_LOGIN_MESSAGE } from "../utils/index";
+import { PATH_USER_CONTEXT, PATH_USER_LOGIN } from "../utils/utils";
+import { alertRequest } from "../../../components/sweetalert/alertRequest";
 
 export const UserContext = createContext();
 
@@ -25,11 +27,11 @@ const clearUserFromStorage = () => {
 
 const loadUserDataFromServer = async (setUser) => {
   try {
-    const { data: user } = await fetchLocalApi.get("/api/user/context", headers);
+    const { data: user } = await localhost.get(PATH_USER_CONTEXT, headers);
     setUser(user);
     return user;
   } catch (error) {
-    console.error("Error:", error.message);
+    console.error(error.message);
     return undefined;
   }
 };
@@ -39,12 +41,15 @@ export const UserProvider = ({ children }) => {
 
   const signIn = async (user) => {
     try {
-      const { data: token } = await fetchLocalApi.post("/login", user);
+      const { data: token } = await localhost.post(PATH_USER_LOGIN, user);
       saveUserToStorage(token, user);
       setUser(user);
     } catch (error) {
-      console.error("Error on sign in", error.message);
-      AlertRequest({ title: "Ocorreu um erro", icon: "error" });
+      console.error(error.message);
+      alertRequest({
+        title: ERROR_LOGIN_MESSAGE.message,
+        icon: ERROR_LOGIN_MESSAGE.icon,
+      });
     }
   };
 
@@ -64,7 +69,7 @@ export const UserProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    (async () => loadUserDataFromServer(setUser))();
+    (() => loadUserDataFromServer(setUser))();
   }, []);
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;

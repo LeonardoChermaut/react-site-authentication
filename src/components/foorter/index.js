@@ -1,0 +1,1 @@
+export { MemorizedFooter } from "./Footer";

@@ -1,18 +1,18 @@
 import React, { useContext } from "react";
 import { Title, Button } from "../index";
-import { UserContext } from "../../services/localhost/index";
-import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../services/localhost/data/index";
 import { NavbarStyled, Link, SignOutButtom } from "./Styled";
+import { useNavigate } from "react-router-dom";
 
 export const Navbar = () => {
   const navigate = useNavigate();
-  const navigateToHome = () => navigate("/home");
-  const navigateToProfile = () => navigate("/profile");
   const { signOut } = useContext(UserContext);
+
+  const navigateToPage = (page) => navigate(page);
 
   return (
     <NavbarStyled expand="lg" sticky="top">
-      <Link onClick={navigateToHome}>Home</Link>
+      <Link onClick={navigateToPage("/home")}>Home</Link>
       <Link href="#">Sobre nós</Link>
       <SignOutButtom onClick={signOut}>Sair</SignOutButtom>
       <Button
@@ -20,7 +20,7 @@ export const Navbar = () => {
         height="60px"
         mLeft="1rem"
         mRight="1rem"
-        onUserPress={navigateToProfile}
+        onUserPress={navigateToPage("/profile")}
       >
         <svg
           width="30"
@@ -29,7 +29,6 @@ export const Navbar = () => {
           viewBox="0 0 16 16"
           className="bi bi-person"
           xmlns="http://www.w3.org/2000/svg"
-          style={{ marginLeft: "-0.2rem" }}
         >
           <path
             d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 

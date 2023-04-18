@@ -1,28 +1,22 @@
 import React, { useState } from "react";
 import { Row, Col } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
 import { Title, Button } from "../../components/index";
-import { registerUser } from "../../services/localhost/index";
+import { registerUser } from "../../services/localhost/data";
 import { ContainerInput, CustomForm, FormRegister } from "./Styled";
-
-const USER_REGISTER_SCHEMA = {
-  name: "",
-  lastName: "",
-  email: "",
-  password: ""
-}
+import { USER_REGISTER_SCHEMA } from "../utils/index";
+import { useNavigate } from "react-router-dom";
 
 export const Register = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(USER_REGISTER_SCHEMA);
-  
-  const returnLogin = () => navigate("/login");
 
-  const validateForm = () =>
+  const navigateToPage = (page) => navigate(page);
+
+  const isValidaRegisterForm = () =>
     user.name.length >= 3 &&
     user.lastName.length >= 4 &&
     user.email.length >= 15 &&
-    user.password.length >= 8;
+    user.senha.length >= 8;
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -31,7 +25,7 @@ export const Register = () => {
       name: user.name,
       lastName: user.lastName,
       email: user.email,
-      senha: user.password,
+      senha: user.senha,
     };
     registerUser(newUser);
   };
@@ -51,13 +45,13 @@ export const Register = () => {
               <CustomForm
                 placeholder="Nome"
                 autoComplete="on"
-                onChange={(e) => setUser({...user, name: e.target.value})}
+                onChange={(e) => setUser({ ...user, name: e.target.value })}
               />
 
               <CustomForm
                 placeholder="Sobrenome"
                 autoComplete="on"
-                onChange={(e) => setUser({...user, lastName: e.target.value})}
+                onChange={(e) => setUser({ ...user, lastName: e.target.value })}
               />
 
               <CustomForm
@@ -65,15 +59,15 @@ export const Register = () => {
                 type="email"
                 value={user.email}
                 autoComplete="on"
-                onChange={(e) => setUser({...user, email: e.target.value})}
+                onChange={(e) => setUser({ ...user, email: e.target.value })}
                 placeholder="Email"
               />
               <CustomForm
                 placeholder="Senha"
                 type="password"
-                value={user.password}
+                value={user.senha}
                 autoComplete="on"
-                onChange={(e) => setUser({...user, password: e.target.value})}
+                onChange={(e) => setUser({ ...user, senha: e.target.value })}
               />
             </Col>
           </Row>
@@ -81,11 +75,15 @@ export const Register = () => {
             mTop="1rem"
             type="submit"
             onUserPress={handleSubmit}
-            disabled={!validateForm()}
+            disabled={!isValidaRegisterForm()}
           >
             Registrar
           </Button>
-          <Button mTop="1rem" onUserPress={returnLogin} bColor="grey">
+          <Button
+            mTop="1rem"
+            onUserPress={() => navigateToPage("/login")}
+            bColor="grey"
+          >
             Voltar
           </Button>
         </FormRegister>

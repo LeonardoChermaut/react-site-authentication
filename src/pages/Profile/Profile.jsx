@@ -1,16 +1,9 @@
 import { React, useContext, useEffect, useState } from "react";
 import { Row, Col, Container } from "react-bootstrap";
 import { Button, Navbar } from "../../components/index";
-import { updateUser } from "../../services/localhost/index";
-import { UserContext } from "../../services/localhost/index";
-
-const PROFILE_SCHEMA = {
-  id: "",
-  nome: "",
-  email: "",
-  sobrenome: "",
-  password: "",
-};
+import { updateUser } from "../../services/localhost/data/index";
+import { UserContext } from "../../services/localhost/data/index";
+import { PROFILE_SCHEMA } from "../utils/index";
 
 export const Profile = () => {
   const { user } = useContext(UserContext);
@@ -24,7 +17,7 @@ export const Profile = () => {
         nome: user.nome,
         email: user.email,
         sobrenome: user.sobrenome,
-        password: user.senha,
+        senha: user.senha,
       };
       setProfile(profile);
     }
@@ -37,7 +30,7 @@ export const Profile = () => {
       nome: profile.nome !== "" ? profile.nome : user.nome,
       email: profile.email !== "" ? profile.email : user.email,
       sobrenome: profile.sobrenome !== "" ? profile.sobrenome : user.sobrenome,
-      password: profile.password !== "" ? profile.password : user.senha,
+      senha: profile.senha !== "" ? profile.senha : user.senha,
     };
     await updateUser(updatedUserProfile);
   };

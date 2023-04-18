@@ -1,32 +1,29 @@
 import React, { useState, useContext } from "react";
 import Form from "react-bootstrap/Form";
-import { useNavigate } from "react-router-dom";
-import { UserContext } from "../../services/localhost/index";
+import { UserContext } from "../../services/localhost/data/index";
 import { Title, Button } from "../../components/index";
 import { ContainerInput, CustomForm, FormLogin } from "./Styled";
-
-const FORM_SCHEMA = {
-  email: "",
-  password: "",
-};
+import { FORM_SCHEMA } from "../utils/index";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
   const navigate = useNavigate();
   const [login, setLogin] = useState(FORM_SCHEMA);
-  const { signed, signIn } = useContext(UserContext);
+  const { signIn } = useContext(UserContext);
 
-  const isValidEmailAndPassword = () => login.email.length > 0 && login.password.length > 0;
-  const navigateTo = (page) => navigate(page);
+  const navigateToPage = (page) => navigate(page);
+
+  const isValidEmailAndPassword = () => login.email.length > 0 && login.senha.length > 0;
+
+  const verifyLoginAndRedirectUser = async (login) => {
+    await signIn(login);
+    navigateToPage("/home");
+  };
 
   const handleSubmitFormLogin = (e) => {
     e.preventDefault();
     if (isValidEmailAndPassword()) {
-      signIn(login);
-      try {
-        if (signed) navigateTo("/home");
-      } catch (error) {
-        throw new Error(error);
-      }
+      verifyLoginAndRedirectUser(login);
     }
   };
 
@@ -50,9 +47,9 @@ export const Login = () => {
           <Form.Control
             autoFocus
             type="password"
-            value={login.password}
+            value={login.senha}
             autoComplete="on"
-            onChange={(e) => setLogin({ ...login, password: e.target.value })}
+            onChange={(e) => setLogin({ ...login, senha: e.target.value })}
           />
         </Form.Group>
         <Button
@@ -66,7 +63,7 @@ export const Login = () => {
         <Button
           mTop="1rem"
           bColor="grey"
-          onUserPress={() => navigateTo("/register")}
+          onUserPress={() => navigateToPage("/register")}
         >
           Registrar
         </Button>

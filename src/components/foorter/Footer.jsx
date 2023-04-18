@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "../index";
-import { CDBBox, CDBFooter, CDBIcon } from "cdbreact";
+import { CDBBox, CDBModalFooter, CDBIcon } from "cdbreact";
 
 const styles = {
   footer: {
@@ -21,7 +21,7 @@ const styles = {
 };
 
 const Footer = () => (
-  <CDBFooter className="fixed-bottom shadow" style={styles.footer}>
+  <CDBModalFooter className="fixed-bottom shadow" style={styles.footer}>
     <CDBBox
       color="white"
       display="flex"
@@ -60,7 +60,7 @@ const Footer = () => (
         </Button>
       </CDBBox>
     </CDBBox>
-  </CDBFooter>
+  </CDBModalFooter>
 );
 
 export const MemorizedFooter = React.memo(Footer);
