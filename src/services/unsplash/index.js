@@ -1,2 +1,1 @@
-export { GetImages, unsplashApi } from "./data/index";
-
+export { fetchImages, unsplashApi } from "./data/index";

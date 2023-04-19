@@ -4,12 +4,12 @@ import {
   ACCEPTED_STATUS_CODE,
   SUCCESS_REGISTER_MESSAGE,
   ERROR_REGISTER_MESSAGE,
+  PATH_USER,
 } from "../utils/index";
 
 export const registerUser = async (user) => {
-  let path = "/api/user";
   try {
-    const { data: status } = await localhost.post(path, user);
+    const { data: status } = await localhost.post(PATH_USER, user);
     if (status === ACCEPTED_STATUS_CODE) {
       AlertRequest({
         title: SUCCESS_REGISTER_MESSAGE.title,

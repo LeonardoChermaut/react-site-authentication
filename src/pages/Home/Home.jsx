@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { Container } from "react-bootstrap";
 import { Navbar, Title } from "../../components/index";
-import { GetImages } from "../../services/unsplash/index";
+import { Images } from "../../components/image";
 
 export const Home = () => (
   <Fragment>
@@ -18,7 +18,7 @@ export const Home = () => (
           necessitatibus dicta quo minima facere perferendis corrupti magnam
           debitis, earum omnis! Animi, architecto.
         </Title>
-        <GetImages />
+        <Images />
       </section>
     </Container>
   </Fragment>

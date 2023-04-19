@@ -4,8 +4,8 @@ export const FORM_SCHEMA = {
 };
 
 export const USER_REGISTER_SCHEMA = {
-  name: "",
-  lastName: "",
+  nome: "",
+  sobrenome: "",
   email: "",
   senha: "",
 };

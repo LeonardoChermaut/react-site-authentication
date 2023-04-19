@@ -2,28 +2,16 @@ import React, { createContext, useEffect, useState } from "react";
 import { localhost } from "./index";
 import { headers } from "../token/index";
 import { ERROR_LOGIN_MESSAGE } from "../utils/index";
-import { PATH_USER_CONTEXT, PATH_USER_LOGIN } from "../utils/utils";
+import {
+  PATH_USER_CONTEXT,
+  PATH_USER_LOGIN,
+  clearUserFromStorage,
+  loadUserFromStorage,
+  saveUserToStorage,
+} from "../utils/utils";
 import { AlertRequest } from "../../../components/sweetalert/AlertRequest";
 
 export const UserContext = createContext();
-
-const loadUserFromStorage = () => {
-  const storageUser = localStorage.getItem("user");
-  if (storageUser) {
-    return JSON.parse(storageUser);
-  }
-  return undefined;
-};
-
-const saveUserToStorage = (token, user) => {
-  localStorage.setItem("token", token);
-  localStorage.setItem("user", JSON.stringify(user));
-};
-
-const clearUserFromStorage = () => {
-  localStorage.removeItem("token");
-  localStorage.removeItem("user");
-};
 
 const loadUserDataFromServer = async (setUser) => {
   try {

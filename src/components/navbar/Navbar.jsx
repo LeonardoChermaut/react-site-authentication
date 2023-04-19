@@ -12,7 +12,7 @@ export const Navbar = () => {
 
   return (
     <NavbarStyled expand="lg" sticky="top">
-      <Link onClick={navigateToPage("/home")}>Home</Link>
+      <Link onClick={() => navigateToPage("/home")}>Home</Link>
       <Link href="#">Sobre nós</Link>
       <SignOutButtom onClick={signOut}>Sair</SignOutButtom>
       <Button
@@ -20,7 +20,7 @@ export const Navbar = () => {
         height="60px"
         mLeft="1rem"
         mRight="1rem"
-        onUserPress={navigateToPage("/profile")}
+        onUserPress={() => navigateToPage("/profile")}
       >
         <svg
           width="30"

@@ -10,11 +10,7 @@ import {
 
 export const updateUser = async (user) => {
   try {
-    const { status } = await localhost.put(
-      PATH_USER_ID(user.id),
-      user,
-      headers
-    );
+    const { status } = await localhost.put(PATH_USER_ID(user.id), user, headers);
     if (status === ACCEPTED_STATUS_CODE) {
       AlertRequest({
         title: SUCCESS_UPDATE_MESSAGE.title,
