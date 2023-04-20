@@ -13,8 +13,8 @@ export const Register = () => {
   const navigateToPage = (page) => navigate(page);
 
   const isValidaRegisterForm = () =>
-    user.name.length >= 3 &&
-    user.lastName.length >= 4 &&
+    user.nome.length >= 3 &&
+    user.sobrenome.length >= 4 &&
     user.email.length >= 15 &&
     user.senha.length >= 8;
 
@@ -22,8 +22,8 @@ export const Register = () => {
     event.preventDefault();
     const newUser = {
       ...USER_REGISTER_SCHEMA,
-      name: user.name,
-      lastName: user.lastName,
+      nome: user.nome,
+      sobrenome: user.sobrenome,
       email: user.email,
       senha: user.senha,
     };
@@ -45,13 +45,13 @@ export const Register = () => {
               <CustomForm
                 placeholder="Nome"
                 autoComplete="on"
-                onChange={(e) => setUser({ ...user, name: e.target.value })}
+                onChange={(e) => setUser({ ...user, nome: e.target.value })}
               />
 
               <CustomForm
                 placeholder="Sobrenome"
                 autoComplete="on"
-                onChange={(e) => setUser({ ...user, lastName: e.target.value })}
+                onChange={(e) => setUser({ ...user, sobrenome: e.target.value })}
               />
 
               <CustomForm
