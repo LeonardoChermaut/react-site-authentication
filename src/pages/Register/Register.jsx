@@ -12,22 +12,25 @@ export const Register = () => {
 
   const navigateToPage = (page) => navigate(page);
 
-  const isValidaRegisterForm = () =>
-    user.nome.length >= 3 &&
-    user.sobrenome.length >= 4 &&
-    user.email.length >= 15 &&
-    user.senha.length >= 8;
+  const isValidRegisterForm = () => {
+    return (
+      user.nome.length >= 3 &&
+      user.sobrenome.length >= 4 &&
+      user.email.length >= 15 &&
+      user.senha.length >= 8
+    );
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const newUser = {
+    const register = {
       ...USER_REGISTER_SCHEMA,
       nome: user.nome,
       sobrenome: user.sobrenome,
       email: user.email,
       senha: user.senha,
     };
-    registerUser(newUser);
+    registerUser(register);
   };
 
   return (
@@ -51,7 +54,9 @@ export const Register = () => {
               <CustomForm
                 placeholder="Sobrenome"
                 autoComplete="on"
-                onChange={(e) => setUser({ ...user, sobrenome: e.target.value })}
+                onChange={(e) =>
+                  setUser({ ...user, sobrenome: e.target.value })
+                }
               />
 
               <CustomForm
@@ -75,7 +80,7 @@ export const Register = () => {
             mTop="1rem"
             type="submit"
             onUserPress={handleSubmit}
-            disabled={!isValidaRegisterForm()}
+            disabled={!isValidRegisterForm()}
           >
             Registrar
           </Button>
