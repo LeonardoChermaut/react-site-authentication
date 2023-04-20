@@ -1,7 +1,7 @@
-export const SWAL_FIRE_SCHEMA = ({ icon, title }) => ({
+export const SWAL_FIRE_SCHEMA = ({ title, icon }) => ({
   position: "center",
-  icon,
   title,
+  icon,
   timer: 1500,
   timerProgressBar: true,
   showConfirmButton: true,

@@ -1,15 +1,15 @@
 import React, { createContext, useEffect, useState } from "react";
 import { localhost } from "./index";
 import { headers } from "../token/index";
-import { ERROR_LOGIN_MESSAGE } from "../utils/index";
 import {
   PATH_USER_CONTEXT,
   PATH_USER_LOGIN,
   clearUserFromStorage,
+  displayError,
   loadUserFromStorage,
   saveUserToStorage,
+  ERROR_LOGIN_MESSAGE,
 } from "../utils/utils";
-import { AlertRequest } from "../../../components/sweetalert/AlertRequest";
 
 export const UserContext = createContext();
 
@@ -19,8 +19,7 @@ const loadUserDataFromServer = async (setUser) => {
     setUser(user);
     return user;
   } catch (error) {
-    console.error(error.message);
-    return undefined;
+    displayError(error);
   }
 };
 
@@ -33,11 +32,7 @@ export const UserProvider = ({ children }) => {
       saveUserToStorage(token, user);
       setUser(user);
     } catch (error) {
-      console.error(error.message);
-      AlertRequest({
-        title: ERROR_LOGIN_MESSAGE.message,
-        icon: ERROR_LOGIN_MESSAGE.icon,
-      });
+      displayError(error, ERROR_LOGIN_MESSAGE);
     }
   };
 

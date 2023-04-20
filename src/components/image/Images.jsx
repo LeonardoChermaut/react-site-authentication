@@ -17,7 +17,12 @@ export const Images = () => {
     getImages();
   }, []);
 
-  if (isLoading) return <Title fSize="1.5rem" tAlign="center" mTop="5rem">Carregando imagens...</Title>;
+  if (isLoading)
+    return (
+      <Title fSize="1.5rem" tAlign="center" mTop="5rem">
+        Carregando imagens...
+      </Title>
+    );
 
   return (
     <GaleryContainer fluid>

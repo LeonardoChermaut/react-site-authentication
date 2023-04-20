@@ -1,3 +1,5 @@
+import { AlertRequest } from "../../../components/sweetalert/AlertRequest";
+
 export const ACCEPTED_STATUS_CODE = 200;
 
 export const PATH_USER_LOGIN = "/login";
@@ -22,6 +24,17 @@ export const saveUserToStorage = (token, user) => {
 export const clearUserFromStorage = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("user");
+};
+
+export const displayError = (error, schema) => {
+  console.error(error.message);
+  if (schema) {
+    AlertRequest({
+      title: schema.title,
+      icon: schema.icon,
+    });
+  }
+  return undefined;
 };
 
 export const ERROR_LOGIN_MESSAGE = {
