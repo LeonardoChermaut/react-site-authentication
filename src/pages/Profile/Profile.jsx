@@ -9,11 +9,12 @@ export const Profile = () => {
   const { user } = useContext(UserContext);
   const [profile, setProfile] = useState(PROFILE_SCHEMA);
 
-  const verifyUserObjectContext = (user) => {
-    if (user) {
+  const verifyUserObjectContext = async (user) => {
+    const isUser = await user;
+    if (isUser) {
       const profile = {
         ...PROFILE_SCHEMA,
-        id: parseInt(user.id),
+        id: user.id,
         nome: user.nome,
         email: user.email,
         sobrenome: user.sobrenome,
@@ -24,15 +25,15 @@ export const Profile = () => {
   };
 
   const handleInputToUpdateProfile = async () => {
-    const updatedUserProfile = {
+    const updated = {
       ...PROFILE_SCHEMA,
       id: profile.id,
-      nome: profile.nome !== "" ? profile.nome : user.nome,
-      email: profile.email !== "" ? profile.email : user.email,
-      sobrenome: profile.sobrenome !== "" ? profile.sobrenome : user.sobrenome,
-      senha: profile.senha !== "" ? profile.senha : user.senha,
+      nome: profile.nome,
+      email: profile.email,
+      sobrenome: profile.sobrenome,
+      senha: profile.senha,
     };
-    await updateUser(updatedUserProfile);
+    await updateUser(updated);
   };
 
   const handleInputChange = (event) => {
@@ -107,7 +108,7 @@ export const Profile = () => {
                 mTop="1.5rem"
                 height="2.7rem"
                 hover="darkgreen"
-                onUserPress={handleInputToUpdateProfile}
+                onUserPress={() => handleInputToUpdateProfile()}
               >
                 Salvar
               </Button>

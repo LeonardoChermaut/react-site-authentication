@@ -21,7 +21,7 @@ export const Register = () => {
     );
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const register = {
       ...USER_REGISTER_SCHEMA,
@@ -30,7 +30,7 @@ export const Register = () => {
       email: user.email,
       senha: user.senha,
     };
-    registerUser(register);
+    await registerUser(register);
   };
 
   return (
