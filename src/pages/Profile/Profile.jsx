@@ -1,8 +1,7 @@
 import { React, useCallback, useContext, useEffect, useState } from "react";
 import { Row, Col, Container } from "react-bootstrap";
 import { Button, Navbar } from "../../components/index";
-import { updateUser } from "../../services/localhost/data/index";
-import { UserContext } from "../../services/localhost/data/index";
+import { updateUser, UserContext } from "../../services/localhost/data/index";
 import { PROFILE_SCHEMA } from "../utils/index";
 
 export const Profile = () => {

@@ -1,6 +1,10 @@
-import React, { createContext, useEffect, useState } from "react";
-import { localhost } from "./index";
-import { headers } from "../token/index";
+import React, {
+  createContext,
+  useEffect,
+  useState,
+  useCallback,
+  useMemo,
+} from "react";
 import {
   PATH_USER_CONTEXT,
   PATH_USER_LOGIN,
@@ -10,6 +14,8 @@ import {
   saveUserToStorage,
   ERROR_LOGIN_MESSAGE,
 } from "../utils/utils";
+import { localhost } from "./index";
+import { headers } from "../token/index";
 
 export const UserContext = createContext();
 
@@ -26,7 +32,7 @@ const loadUserDataFromServer = async (setUser) => {
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(loadUserFromStorage());
 
-  const signIn = async (user) => {
+  const signIn = useCallback(async (user) => {
     try {
       const { data: token } = await localhost.post(PATH_USER_LOGIN, user);
       saveUserToStorage(token, user);
@@ -34,25 +40,33 @@ export const UserProvider = ({ children }) => {
     } catch (error) {
       displayError(error, ERROR_LOGIN_MESSAGE);
     }
-  };
+  }, []);
 
-  const signOut = () => {
+  const signOut = useCallback(() => {
     setUser(null);
     clearUserFromStorage();
-  };
+  }, []);
 
   const isSignedIn = !!user;
 
-  const value = {
-    user,
-    userDataContext: () => loadUserDataFromServer(setUser),
-    signIn,
-    signed: isSignedIn,
-    signOut,
-  };
+  const userDataContext = useCallback(async () => {
+    const user = await loadUserDataFromServer(setUser);
+    setUser(user);
+  }, []);
+
+  const value = useMemo(
+    () => ({
+      user,
+      userDataContext,
+      signIn,
+      signed: isSignedIn,
+      signOut,
+    }),
+    [user, userDataContext, signIn, isSignedIn, signOut]
+  );
 
   useEffect(() => {
-    (() => loadUserDataFromServer(setUser))();
+    loadUserDataFromServer(setUser);
   }, []);
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
