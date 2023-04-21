@@ -54,8 +54,7 @@ export const UserProvider = ({ children }) => {
     setUser(user);
   }, []);
 
-  const value = useMemo(
-    () => ({
+  const value = useMemo(() => ({
       user,
       userDataContext,
       signIn,
