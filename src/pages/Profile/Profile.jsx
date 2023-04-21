@@ -1,4 +1,4 @@
-import { React, useContext, useEffect, useState } from "react";
+import { React, useCallback, useContext, useEffect, useState } from "react";
 import { Row, Col, Container } from "react-bootstrap";
 import { Button, Navbar } from "../../components/index";
 import { updateUser } from "../../services/localhost/data/index";
@@ -9,7 +9,7 @@ export const Profile = () => {
   const { user } = useContext(UserContext);
   const [profile, setProfile] = useState(PROFILE_SCHEMA);
 
-  const verifyUserObjectContext = async (user) => {
+  const verifyIfUserProfileExists = useCallback(async (user) => {
     const isUser = await user;
     if (isUser) {
       const profile = {
@@ -22,7 +22,7 @@ export const Profile = () => {
       };
       setProfile(profile);
     }
-  };
+  }, []);
 
   const handleInputToUpdateProfile = async () => {
     const updated = {
@@ -42,8 +42,8 @@ export const Profile = () => {
   };
 
   useEffect(() => {
-    verifyUserObjectContext(user);
-  }, [user]);
+    verifyIfUserProfileExists(user);
+  }, [user, verifyIfUserProfileExists]);
 
   return (
     <>
