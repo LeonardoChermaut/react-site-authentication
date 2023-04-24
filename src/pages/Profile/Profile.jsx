@@ -23,22 +23,25 @@ export const Profile = () => {
     }
   }, []);
 
-  const handleInputToUpdateProfile = async () => {
+  const handleInputToUpdateProfile = async (event) => {
+    event.preventDefault();
     const updated = {
-      ...PROFILE_SCHEMA,
       id: profile.id,
-      nome: profile.nome,
-      email: profile.email,
-      sobrenome: profile.sobrenome,
-      senha: profile.senha,
+      nome: event.target.nome.value,
+      email: event.target.email.value,
+      sobrenome: event.target.sobrenome.value,
+      senha: event.target.senha.value,
     };
+    console.log(updated);
     await updateUser(updated);
   };
+  
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setProfile({ ...profile, [name]: value });
   };
+  
 
   useEffect(() => {
     verifyIfUserProfileExists(user);
@@ -47,7 +50,7 @@ export const Profile = () => {
   return (
     <>
       <Navbar />
-      <Container fluid style={{ marginBottom: "3rem" }}>
+      <Container>
         <Row>
           <Col className="col-md-3 border-right">
             <Col className="d-flex flex-column align-items-center text-center p-3 py-5">
@@ -57,8 +60,8 @@ export const Profile = () => {
                 alt="draw peaple"
                 src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
               />
-              <span className="font-weight-bold">{profile.nome}</span>
-              <span className="text-black-50">{profile.email}</span>
+              <span className="font-weight-bold">{`${profile.nome}`}</span>
+              <span className="text-black-50">{`${profile.email}`}</span>
             </Col>
           </Col>
           <Col className="col-md-5 border-right">
@@ -71,7 +74,7 @@ export const Profile = () => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder={profile.nome}
+                  placeholder={`${profile.nome}`}
                   onChange={(e) => handleInputChange(e)}
                 />
               </Col>
@@ -80,7 +83,7 @@ export const Profile = () => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder={profile.sobrenome}
+                  placeholder={`${profile.sobrenome}`}
                   onChange={(e) => handleInputChange(e)}
                 />
               </Col>
@@ -89,7 +92,7 @@ export const Profile = () => {
                 <input
                   type="email"
                   className="form-control"
-                  placeholder={profile.email}
+                  placeholder={`${profile.email}`}
                   onChange={(e) => handleInputChange(e)}
                 />
               </Col>

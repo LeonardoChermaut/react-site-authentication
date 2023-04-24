@@ -1,6 +1,6 @@
 import { AlertRequest } from "../../../components/sweetalert/AlertRequest";
 
-export const ACCEPTED_STATUS_CODE = "ACCEPTED" || 202;
+export const ACCEPTED_STATUS_CODE = "ACCEPTED" || 202
 
 export const PATH_USER_LOGIN = "/login";
 export const PATH_USER = "/api/user";
