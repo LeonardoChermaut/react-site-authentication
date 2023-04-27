@@ -1,6 +1,6 @@
 import { AlertRequest } from "../../../components/sweetalert/AlertRequest";
 
-export const ACCEPTED_STATUS_CODE = "ACCEPTED" || 202
+export const ACCEPTED_STATUS_CODE = "ACCEPTED";
 
 export const PATH_USER_LOGIN = "/login";
 export const PATH_USER = "/api/user";
@@ -8,23 +8,6 @@ export const PATH_USER_CONTEXT = "/api/user/context";
 export const BASE_URL_API = "http://localhost:8080";
 export const PATH_USER_ID = (id) => `/api/user/${id}`;
 
-export const loadUserFromStorage = () => {
-  const storageUser = localStorage.getItem("user");
-  if (storageUser) {
-    return JSON.parse(storageUser);
-  }
-  return undefined;
-};
-
-export const saveUserToStorage = (token, user) => {
-  localStorage.setItem("token", token);
-  localStorage.setItem("user", JSON.stringify(user));
-};
-
-export const clearUserFromStorage = () => {
-  localStorage.removeItem("token");
-  localStorage.removeItem("user");
-};
 
 export const displayError = (error, schema) => {
   console.error(error.message);
@@ -38,7 +21,7 @@ export const displayError = (error, schema) => {
 };
 
 export const ERROR_LOGIN_MESSAGE = {
-  message: "Login ou senha inválidas",
+  title: "Login ou senha inválidas",
   icon: "error",
 };
 

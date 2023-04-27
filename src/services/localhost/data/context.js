@@ -6,31 +6,33 @@ import React, {
   useMemo,
 } from "react";
 import {
-  PATH_USER_CONTEXT,
-  PATH_USER_LOGIN,
-  clearUserFromStorage,
   displayError,
-  loadUserFromStorage,
-  saveUserToStorage,
+  PATH_USER_LOGIN,
+  PATH_USER_CONTEXT,
   ERROR_LOGIN_MESSAGE,
 } from "../utils/utils";
 import { localhost } from "./index";
-import { headers } from "../token/index";
+import {
+  headers,
+  saveUserToStorage,
+  loadUserFromStorage,
+  clearUserFromStorage,
+} from "../token/index";
 
 export const UserContext = createContext();
 
-const loadUserDataFromServer = async (setUser) => {
-  try {
-    const { data: user } = await localhost.get(PATH_USER_CONTEXT, headers);
-    setUser(user);
-    return user;
-  } catch (error) {
-    displayError(error);
-  }
-};
-
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(loadUserFromStorage());
+
+  const loadUserDataFromServer = async (setUser) => {
+    try {
+      const { data: user } = await localhost.get(PATH_USER_CONTEXT, headers);
+      setUser(user);
+      return user;
+    } catch (error) {
+      displayError(error);
+    }
+  };
 
   const signIn = useCallback(async (user) => {
     try {
@@ -54,7 +56,8 @@ export const UserProvider = ({ children }) => {
     setUser(user);
   }, []);
 
-  const value = useMemo(() => ({
+  const value = useMemo(
+    () => ({
       user,
       userDataContext,
       signIn,

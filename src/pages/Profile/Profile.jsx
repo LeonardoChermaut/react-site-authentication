@@ -8,44 +8,40 @@ export const Profile = () => {
   const { user } = useContext(UserContext);
   const [profile, setProfile] = useState(PROFILE_SCHEMA);
 
-  const verifyIfUserProfileExists = useCallback(async (user) => {
-    const isUser = await user;
-    if (isUser) {
-      const profile = {
-        ...PROFILE_SCHEMA,
-        id: user.id,
-        nome: user.nome,
-        email: user.email,
-        sobrenome: user.sobrenome,
-        senha: user.senha,
-      };
-      setProfile(profile);
-    }
+  const getUserContext = useCallback((user) => {
+    let loading = 'Carregando...'
+    const profile = {
+      ...PROFILE_SCHEMA,
+      id: user?.id || loading,
+      nome: user?.nome || loading,
+      email: user?.email || loading,
+      sobrenome: user?.sobrenome || loading,
+      senha: user?.senha || loading,
+    };
+    setProfile(profile);
   }, []);
 
-  const handleInputToUpdateProfile = async (event) => {
-    event.preventDefault();
-    const updated = {
+  const handleInputToUpdateProfile = () => {
+    const updatedProfile = {
+      ...PROFILE_SCHEMA,
       id: profile.id,
-      nome: event.target.nome.value,
-      email: event.target.email.value,
-      sobrenome: event.target.sobrenome.value,
-      senha: event.target.senha.value,
+      nome: profile?.nome || profile.nome,
+      email: profile?.email || profile.email,
+      sobrenome: profile?.sobrenome || profile.sobrenome,
+      senha: profile?.senha || profile.senha,
     };
-    console.log(updated);
-    await updateUser(updated);
+    console.log(updatedProfile);
+    updateUser(updatedProfile);
   };
-  
 
-  const handleInputChange = (event) => {
+  const handleInputChange = useCallback((event) => {
     const { name, value } = event.target;
-    setProfile({ ...profile, [name]: value });
-  };
-  
+    setProfile((prevProfile) => ({ ...prevProfile, [name]: value }));
+  }, []);
 
   useEffect(() => {
-    verifyIfUserProfileExists(user);
-  }, [user, verifyIfUserProfileExists]);
+    getUserContext(user);
+  }, [user, getUserContext]);
 
   return (
     <>

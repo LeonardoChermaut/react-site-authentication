@@ -10,8 +10,5 @@ export {
   SUCCESS_REGISTER_MESSAGE,
   PATH_USER_ID,
   SUCCESS_UPDATE_MESSAGE,
-  clearUserFromStorage,
-  loadUserFromStorage,
   displayError,
-  saveUserToStorage,
 } from "./utils";

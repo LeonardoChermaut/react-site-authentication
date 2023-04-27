@@ -1,1 +1,7 @@
-export { token, headers } from "./token";
+export {
+  token,
+  headers,
+  clearUserFromStorage,
+  loadUserFromStorage,
+  saveUserToStorage,
+} from "./token";
