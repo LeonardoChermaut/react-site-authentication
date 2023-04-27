@@ -22,9 +22,9 @@ import {
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(loadUserFromStorage());
+  const [user, setUser] = useState(loadUserFromStorage);
 
-  const loadUserDataFromServer = async (setUser) => {
+  const loadUserDataFromServer = useCallback(async () => {
     try {
       const { data: user } = await localhost.get(PATH_USER_CONTEXT, headers);
       setUser(user);
@@ -32,7 +32,7 @@ export const UserProvider = ({ children }) => {
     } catch (error) {
       displayError(error);
     }
-  };
+  }, []);
 
   const signIn = useCallback(async (user) => {
     try {
@@ -49,27 +49,22 @@ export const UserProvider = ({ children }) => {
     clearUserFromStorage();
   }, []);
 
-  const isSignedIn = !!user;
-
-  const userDataContext = useCallback(async () => {
-    const user = await loadUserDataFromServer(setUser);
-    setUser(user);
-  }, []);
+  const isSignedIn = useMemo(() => !!user, [user]);
 
   const value = useMemo(
     () => ({
       user,
-      userDataContext,
+      userDataContext: loadUserDataFromServer,
       signIn,
       signed: isSignedIn,
       signOut,
     }),
-    [user, userDataContext, signIn, isSignedIn, signOut]
+    [user, loadUserDataFromServer, signIn, isSignedIn, signOut]
   );
 
   useEffect(() => {
-    loadUserDataFromServer(setUser);
-  }, []);
+    loadUserDataFromServer();
+  }, [loadUserDataFromServer]);
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
