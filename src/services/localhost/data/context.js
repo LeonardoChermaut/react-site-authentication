@@ -9,7 +9,7 @@ import {
   displayError,
   PATH_USER_LOGIN,
   PATH_USER_CONTEXT,
-  ERROR_LOGIN_MESSAGE,
+  SCHEMA_MESSAGES,
 } from "../utils/utils";
 import { localhost } from "./index";
 import {
@@ -40,7 +40,7 @@ export const UserProvider = ({ children }) => {
       saveUserToStorage(token, user);
       setUser(user);
     } catch (error) {
-      displayError(error, ERROR_LOGIN_MESSAGE);
+      displayError(error, SCHEMA_MESSAGES.error.login);
     }
   }, []);
 
