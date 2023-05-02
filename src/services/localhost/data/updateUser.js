@@ -1,7 +1,7 @@
 import { localhost } from "./index";
 import { AlertRequest } from "../../../components/sweetalert/index";
 import { headers } from "../token/index";
-import { PATH_USER_ID, SCHEMA_MESSAGES, displayError } from "../utils/index";
+import { PATH_USER_ID, MESSAGES, displayError } from "../utils/index";
 
 export const updateUser = async (user) => {
   try {
@@ -10,8 +10,8 @@ export const updateUser = async (user) => {
       user,
       headers
     );
-    if (status === 202) AlertRequest(SCHEMA_MESSAGES.success.update);
+    if (status === 202) AlertRequest(MESSAGES.success.update);
   } catch (error) {
-    displayError(error, SCHEMA_MESSAGES.error.update);
+    displayError(error, MESSAGES.error.update);
   }
 };

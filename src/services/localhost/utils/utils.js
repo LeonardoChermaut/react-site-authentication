@@ -1,10 +1,13 @@
 import { AlertRequest } from "../../../components/sweetalert/AlertRequest";
 
-export const PATH_USER = "/api/user";
-export const PATH_USER_LOGIN = "/login";
-export const ACCEPTED_STATUS_CODE = "ACCEPTED";
-export const BASE_URL_API = "http://localhost:8080";
-export const PATH_USER_CONTEXT = "/api/user/context";
+export const API = {
+  path: {
+    user: "/api/user",
+    login: "/login",
+    context: "/api/user/context",
+    url: "http://localhost:8080",
+  },
+};
 export const PATH_USER_ID = (id) => `/api/user/${id}`;
 
 export const displayError = (error, schema) => {
@@ -18,7 +21,7 @@ export const displayError = (error, schema) => {
   return undefined;
 };
 
-export const SCHEMA_MESSAGES = {
+export const MESSAGES = {
   success: {
     update: {
       title: "Atualização com sucesso",

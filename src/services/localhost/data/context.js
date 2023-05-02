@@ -7,9 +7,8 @@ import React, {
 } from "react";
 import {
   displayError,
-  PATH_USER_LOGIN,
-  PATH_USER_CONTEXT,
-  SCHEMA_MESSAGES,
+  MESSAGES,
+  API,
 } from "../utils/utils";
 import { localhost } from "./index";
 import {
@@ -26,7 +25,7 @@ export const UserProvider = ({ children }) => {
 
   const loadUserDataFromServer = useCallback(async () => {
     try {
-      const { data: user } = await localhost.get(PATH_USER_CONTEXT, headers);
+      const { data: user } = await localhost.get(API.path.context, headers);
       setUser(user);
       return user;
     } catch (error) {
@@ -36,11 +35,11 @@ export const UserProvider = ({ children }) => {
 
   const signIn = useCallback(async (user) => {
     try {
-      const { data: token } = await localhost.post(PATH_USER_LOGIN, user);
+      const { data: token } = await localhost.post(API.path.login, user);
       saveUserToStorage(token, user);
       setUser(user);
     } catch (error) {
-      displayError(error, SCHEMA_MESSAGES.error.login);
+      displayError(error, MESSAGES.error.login);
     }
   }, []);
 

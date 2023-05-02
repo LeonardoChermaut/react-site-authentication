@@ -1,10 +1,1 @@
-export {
-  ACCEPTED_STATUS_CODE,
-  BASE_URL_API,
-  SCHEMA_MESSAGES,
-  PATH_USER,
-  PATH_USER_CONTEXT,
-  PATH_USER_LOGIN,
-  PATH_USER_ID,
-  displayError,
-} from "./utils";
+export { MESSAGES, API, PATH_USER_ID, displayError } from "./utils";
