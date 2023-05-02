@@ -33,6 +33,11 @@ export const Register = () => {
     await registerUser(register);
   };
 
+  const handleInputChange = (prop) => (event) => {
+    const { value } = event.target;
+    setUser((prevState) => ({ ...prevState, [prop]: value }));
+  };
+
   return (
     <section>
       <ContainerInput>
@@ -48,15 +53,13 @@ export const Register = () => {
               <CustomForm
                 placeholder="Nome"
                 autoComplete="on"
-                onChange={(e) => setUser({ ...user, nome: e.target.value })}
+                onChange={handleInputChange("nome")}
               />
 
               <CustomForm
                 placeholder="Sobrenome"
                 autoComplete="on"
-                onChange={(e) =>
-                  setUser({ ...user, sobrenome: e.target.value })
-                }
+                onChange={handleInputChange("sobrenome")}
               />
 
               <CustomForm
@@ -64,7 +67,7 @@ export const Register = () => {
                 type="email"
                 value={user.email}
                 autoComplete="on"
-                onChange={(e) => setUser({ ...user, email: e.target.value })}
+                onChange={handleInputChange("email")}
                 placeholder="Email"
               />
               <CustomForm
@@ -72,7 +75,7 @@ export const Register = () => {
                 type="password"
                 value={user.senha}
                 autoComplete="on"
-                onChange={(e) => setUser({ ...user, senha: e.target.value })}
+                onChange={handleInputChange("senha")}
               />
             </Col>
           </Row>
