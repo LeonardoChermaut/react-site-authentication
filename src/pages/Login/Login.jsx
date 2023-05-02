@@ -27,6 +27,11 @@ export const Login = () => {
     }
   };
 
+  const handleInputChange = (prop) => (event) => {
+    const { value } = event.target;
+    setLogin((prevState) => ({ ...prevState, [prop]: value }));
+  };
+
   return (
     <ContainerInput>
       <Title fSize="30px" tAlign="center" mBottom="2rem" mTop="1rem">
@@ -39,7 +44,7 @@ export const Login = () => {
             autoFocus
             type="email"
             value={login.email}
-            onChange={(e) => setLogin({ ...login, email: e.target.value })}
+            onChange={handleInputChange('email')}
           />
         </Form.Group>
         <Form.Group size="lg" controlId="password">
@@ -49,7 +54,7 @@ export const Login = () => {
             type="password"
             value={login.senha}
             autoComplete="on"
-            onChange={(e) => setLogin({ ...login, senha: e.target.value })}
+            onChange={handleInputChange('senha')}
           />
         </Form.Group>
         <Button
