@@ -1,12 +1,13 @@
 import React, { useMemo, useContext, useState } from "react";
 import { Row, Col, Container } from "react-bootstrap";
 import { Button, Navbar } from "../../components/index";
-import { updateUser, UserContext } from "../../services/localhost/data/index";
+import { updateUser, UserContext } from "../../api/host/index";
 
 export const Profile = () => {
   const { user } = useContext(UserContext);
   const [profile, setProfile] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const isDisabled = loading;
 
   useMemo(() => {
     if (user) {
@@ -16,12 +17,11 @@ export const Profile = () => {
   }, [user]);
 
   const handleInputToUpdateProfile = async () => {
-    setLoading(true);
-    await updateUser(profile);
     setLoading(false);
+    await updateUser(profile);
   };
 
-  const isLoading = (param) => (loading || !param ? "Carregando..." : param);
+  const isLoading = (param) => (!loading || !param ? "Carregando..." : param);
 
   const placeholder = {
     nome: isLoading(profile?.nome),
@@ -30,9 +30,11 @@ export const Profile = () => {
   };
 
   const handleInputChange = (prop) => (event) => {
+    setLoading(false);
     const { value } = event.target;
     setProfile((prevState) => ({ ...prevState, [prop]: value }));
-  };
+  }; 
+  
 
   return (
     <>
@@ -98,6 +100,7 @@ export const Profile = () => {
                 height="2.7rem"
                 hover="darkgreen"
                 onUserPress={() => handleInputToUpdateProfile()}
+                disabled={isDisabled}
               >
                 Salvar
               </Button>

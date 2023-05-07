@@ -1,24 +1,11 @@
-import { AlertRequest } from "../../../components/sweetalert/AlertRequest";
-
 export const API = {
   path: {
-    user: "/api/user",
-    login: "/login",
-    context: "/api/user/context",
-    url: "http://localhost:8080",
+    user_login: "/login",
+    user_register: "/api/user",
+    user_context: "/api/user/context",
+    base_url: "http://localhost:8080",
+    user_data: (id) => `/api/user/${id}`,
   },
-};
-export const PATH_USER_ID = (id) => `/api/user/${id}`;
-
-export const displayError = (error, schema) => {
-  console.error(error.message);
-  if (schema) {
-    AlertRequest({
-      title: schema.title,
-      icon: schema.icon,
-    });
-  }
-  return undefined;
 };
 
 export const MESSAGES = {

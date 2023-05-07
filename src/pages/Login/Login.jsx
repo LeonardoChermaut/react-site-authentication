@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
 import Form from "react-bootstrap/Form";
-import { UserContext } from "../../services/localhost/data/index";
+import { UserContext } from "../../api/host/index";
 import { Title, Button } from "../../components/index";
 import { ContainerInput, CustomForm, FormLogin } from "./Styled";
-import { FORM_SCHEMA } from "../utils/index";
+import { FORM_SCHEMA } from "../utils/constants";
 import { useNavigate } from "react-router-dom";
 
 export const Login = () => {

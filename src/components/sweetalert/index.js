@@ -1,1 +1,1 @@
-export { AlertRequest } from "./AlertRequest";
+export { alertRequest, throwErrorAlertRequest } from "./alerts";

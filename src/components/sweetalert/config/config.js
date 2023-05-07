@@ -1,4 +1,4 @@
-export const SWAL_FIRE_SCHEMA = ({ icon, title }) => ({
+export const configuration = ({ icon, title }) => ({
   position: "center",
   icon,
   title,

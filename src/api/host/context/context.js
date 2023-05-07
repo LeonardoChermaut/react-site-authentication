@@ -6,17 +6,15 @@ import React, {
   useMemo,
 } from "react";
 import {
-  displayError,
+  api,
   MESSAGES,
   API,
-} from "../utils/utils";
-import { localhost } from "./index";
-import {
   headers,
   saveUserToStorage,
   loadUserFromStorage,
   clearUserFromStorage,
-} from "../token/index";
+} from "../index";
+import { throwErrorAlertRequest } from "../../../components/sweetalert/index";
 
 export const UserContext = createContext();
 
@@ -25,21 +23,28 @@ export const UserProvider = ({ children }) => {
 
   const loadUserDataFromServer = useCallback(async () => {
     try {
-      const { data: user } = await localhost.get(API.path.context, headers);
+      const {
+        path: { user_context: data },
+      } = API;
+      const { data: user } = await api.get(data, headers);
       setUser(user);
       return user;
-    } catch (error) {
-      displayError(error);
+    } catch (e) {
+      throwErrorAlertRequest(e);
     }
   }, []);
 
   const signIn = useCallback(async (user) => {
     try {
-      const { data: token } = await localhost.post(API.path.login, user);
+      const {
+        path: { user_login: signin },
+      } = API;
+      const { data: token } = await api.post(signin, user);
       saveUserToStorage(token, user);
       setUser(user);
-    } catch (error) {
-      displayError(error, MESSAGES.error.login);
+    } catch (e) {
+      const { error: { login: error } } = MESSAGES;
+      throwErrorAlertRequest(e, error);
     }
   }, []);
 

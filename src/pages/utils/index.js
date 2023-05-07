@@ -1,2 +1,2 @@
-export { FORM_SCHEMA } from "./utils";
-export { USER_REGISTER_SCHEMA } from "./utils";
+export { FORM_SCHEMA } from "./constants";
+export { USER_REGISTER_SCHEMA } from "./constants";
